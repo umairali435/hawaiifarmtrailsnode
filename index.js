@@ -15,7 +15,12 @@ app.use(express.static(path.join(__dirname+'/public')));
 app.set('views', path.join(__dirname, 'views'));
 app.use(bodyparser.urlencoded({extended:false}));
 app.use(bodyparser.json());
-mongoose.connect('mongodb://localhost:27017/hawaiifarmtrails',{useNewUrlParser:true})  
+mongoose.connect('mongodb+srv://umairali:umair@12345@cluster0.hidt5.mongodb.net/hawaiifarmtrails?retryWrites=true&w=majority',{
+  useCreateIndex: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false
+})  
 .then(()=>console.log('connected to db'))  
 .catch((err)=>console.log('connection error',err));
 mongoose.Promise=global.Promise;
