@@ -10,7 +10,7 @@ require('dotenv').config();
 const app=express();
 app.set('view engine', 'ejs');
 app.use('/admin', express.static(__dirname + '/admin'));
-app.use('/uploadFile', express.static(__dirname + '/uploadFile'));
+app.use('/uploads', express.static(__dirname + '/uploads'));
 app.use(express.static(path.join(__dirname+'/public')));  
 
 app.set('views', path.join(__dirname, 'views'));
