@@ -5,6 +5,7 @@ const bodyparser=require("body-parser");
 const fs=require('fs');
 const path = require('path');
 let multer = require("multer");
+require('dotenv').config();
 
 const app=express();
 app.set('view engine', 'ejs');
@@ -15,7 +16,10 @@ app.use(express.static(path.join(__dirname+'/public')));
 app.set('views', path.join(__dirname, 'views'));
 app.use(bodyparser.urlencoded({extended:false}));
 app.use(bodyparser.json());
-mongoose.connect('mongodb+srv://umairali:umair@12345@cluster0.hidt5.mongodb.net/hawaiifarmtrails?retryWrites=true&w=majority',{
+let dbUser = process.env.DB_USERNAME;
+let dbPass = process.env.DB_PASSWORD;
+const uri=`mongodb+srv://${dbUser}:${dbPass}@cluster0.hidt5.mongodb.net/hawaiifarmtrails?retryWrites=true&w=majority`;
+mongoose.connect(uri,{
   useCreateIndex: true,
   useNewUrlParser: true,
   useUnifiedTopology: true,
