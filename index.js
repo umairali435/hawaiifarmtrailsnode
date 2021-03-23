@@ -34,6 +34,6 @@ app.use('/user',userRouter);
 app.use('/FarmStand',userFarm);
 app.get('/',(req,res)=>{
     res.redirect('/FarmStand/home');
-  });
-  const PORT=process.env.PORT||3000;
+});
+const PORT=process.env.PORT||3000;
 app.listen(PORT);
