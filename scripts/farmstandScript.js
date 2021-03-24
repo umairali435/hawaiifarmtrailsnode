@@ -214,12 +214,12 @@ module.exports={
             });
         }
         
-        if(req.body.features==undefined||req.body.features==null){
-            return res.status(200).json({
-                "Success":false,
-                "message":"please enter your features",
-            });
-        }
+        // if(req.body.features==undefined||req.body.features==null){
+        //     return res.status(200).json({
+        //         "Success":false,
+        //         "message":"please enter your features",
+        //     });
+        // }
         if(req.body.reservation==undefined||req.body.reservation==null){
             return res.status(200).json({
                 "Success":false,

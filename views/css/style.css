@@ -1,0 +1,47 @@
+.lab_information{
+  width: 400px;
+}
+.lab_information h2,h5{
+  color: #11477C;
+}
+.lab_information h5{
+  font-size: 16px;
+}
+.lab_information p{
+  background-color: #11477C;
+  font-size: 30px;
+  color: white;
+  border-radius: 10px;
+  width: 150px;
+  text-align: center;
+}
+.main{
+  display: inline-flex;
+}
+#qq{
+  height: 550px;
+}
+.submit_button{
+  width: 150px;
+  height: 40px;
+  border-radius: 5px;
+  /* background-color: #7fa14b; */
+  color: white;
+  border-style: none;
+}
+#aa{
+  text-align: center;
+}
+/* #card_header{
+  background-color:#d69b0f;
+} */
+/* --------------------------------retriew data from data base---------------- */
+
+#delete{
+  background-color:#e84545;
+  color: white;
+  height: 40px;
+  font-size: 16px;
+  border-style: none;
+  border-radius: 5px;
+}

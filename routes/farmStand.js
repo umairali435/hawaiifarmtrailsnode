@@ -2,7 +2,7 @@ const express=require('express');
 const router=express.Router();
 const Product=require('../scripts/farmstandScript');
 const User=require('../scripts/userScript');
-const AdminUser=require('../models/adminuser');
+const AdminUser=require('../scripts/admin/adminlogin');
 const multer=require('multer');
 const storage=multer.diskStorage({
     destination:'uploads/',
@@ -41,7 +41,7 @@ Product.famstandAddproduct(req,res);
 router.post('/csa/addProduct',upload.single('image'),(req,res)=>{
 Product.CsaProduct(req,res);
 });
-router.post('/AddFarmandRanches',upload.single('image'),(req,res)=>{
+router.post('/Farms&Ranches',upload.single('image'),(req,res)=>{
 Product.addFarmAndRanches(req,res);
 });
 router.post('/AddFarmerMarket',upload.single('image'),(req,res)=>{

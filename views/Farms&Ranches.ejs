@@ -6,6 +6,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Farms & Ranches</title>
     <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">  </head>
   <body>
 
@@ -18,7 +19,7 @@
              <h4 style="color:white">Farms & Ranches</h4>
        </div>
        <div class="card-body">
-         <form class="card-text" id="addfarmandranches">
+         <form class="card-text" id="addfarmandranches" method="post"  enctype="multipart/form-data">
      <div class="row">
        <div class="col">
          <input type="text" class="form-control" placeholder="Product Name" name="name" required>
@@ -33,7 +34,7 @@
            <input type="text" class="form-control" placeholder="Product Details" name="details" required>
          </div>
          <div class="col">
-           <input type="file" class="form-control" placeholder="Product Image" name="image" accept=".jpg, .jpeg, .png" required>
+           <input type="file" class="form-control" id="image" placeholder="Product Image" name="image" accept=".jpg, .jpeg, .png" required>
          </div>
 
        </div>
@@ -74,7 +75,7 @@
        <br>
    <div class="row">
        <div class="col-6">
-         <select class="custom-select form-control " id="gender2",name="">
+         <select class="custom-select form-control " id="gender2",name="features">
            <option selected>Types</option>
            <option value="1">Education</option>
            <option value="2">Farm to tables</option>
@@ -83,7 +84,7 @@
          </select>
          </div>
          <div class="col-6">
-           <select class="custom-select form-control " id="gender2">
+           <select class="custom-select form-control " id="gender2",name="features">
              <option selected>Features</option>
              <option value="1">Alcohal</option>
              <option value="2">Animals</option>
@@ -167,13 +168,16 @@
 
 e.preventDefault(); // avoid to execute the actual submit of the form.
 $('.loading').css('display', 'block');
-let fileToUpload = $('#filetoUpload').prop('files')[0];
+var files = $('#image')[0].files;
 formDataAll = new FormData(this)
+if(files.length > 0 ){
+  fd.append('image',files[0]);
 $.ajax({
     type: "POST",
-    url: '/login/addfarmandranches',
+    url: '/FarmStand/Farms&Ranches',
     processData: false,
     contentType: false,
+    enctype: 'multipart/form-data',
     data: formDataAll,
     // serializes the form's elements.
     success: function (data) {
@@ -183,8 +187,7 @@ $.ajax({
 
     }
 });
-
-
+}
 });
 </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
