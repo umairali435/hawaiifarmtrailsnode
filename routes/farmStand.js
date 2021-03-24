@@ -1,6 +1,8 @@
 const express=require('express');
 const router=express.Router();
 const Product=require('../scripts/farmstandScript');
+const User=require('../scripts/userScript');
+const AdminUser=require('../../hawaiifarmtrails/scripts/admin/adminlogin');
 const multer=require('multer');
 const storage=multer.diskStorage({
     destination:'uploads/',
@@ -18,12 +20,24 @@ if(file.mimetype==="image/jpeg"||file.mimetype==="image/png"){
 const upload =multer({storage:storage,limits:{
     fileSize:1024*1024*5,
 }, fileFilter:fileFilter});
-router.get('/home',(req,res)=>{
+router.get('/Admin',(req,res)=>{
     res.render('demo');
 });
-router.post('/farmStand/addProdcuct',upload.single('image'),(req,res)=>{
-    Product.famstandAddproduct(req,res);
-    });
+router.post('/Admin',(req,res)=>{
+    AdminUser.loginAdmin(req,res);
+}); 
+router.get('/getevents',(req,res)=>{
+    res.render('events');
+});
+router.get('/Farms&Ranches',(req,res)=>{
+    res.render('Farms&Ranches');
+});
+router.post('/events',(req,res)=>{
+    res.render('events');
+});
+router.post('/getevents',upload.single('image'),(req,res)=>{
+Product.famstandAddproduct(req,res);
+});
 router.post('/csa/addProduct',upload.single('image'),(req,res)=>{
 Product.CsaProduct(req,res);
 });
