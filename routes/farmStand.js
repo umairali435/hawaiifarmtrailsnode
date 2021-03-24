@@ -1,5 +1,6 @@
 const express=require('express');
 const router=express.Router();
+let passport = require('passport');
 const Product=require('../scripts/farmstandScript');
 const GetFarmAndRanches=require('../scripts/admin/admingetdatas');
 const User=require('../scripts/userScript');
@@ -24,13 +25,13 @@ const upload =multer({storage:storage,limits:{
 router.get('/Admin',(req,res)=>{
     res.render('demo');
 });
-router.post('/Admin',(req,res)=>{
-    AdminUser.loginAdmin(req,res);
-}); 
+router.post('/AdminDashboard',(req,res,next)=>{
+    AdminUser.loginAdmin(req,res,next);
+});
 router.get('/getevents',(req,res)=>{
     res.render('events');
 });
-router.get('/Farms&Ranches',(req,res)=>{
+router.get('/Farms&Ranches',(req,res)=>{    
     GetFarmAndRanches.getFarmAndRanchesAdmin(req,res);
 });
 router.post('/events',(req,res)=>{
@@ -66,4 +67,9 @@ router.get('/getFarmerMarkets',(req,res)=>{
 router.get('/events',(req,res)=>{
     Product.getEvents(req,res);
 });
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated())
+        return next();
+    return res.redirect('admin');
+}
 module.exports=router;

@@ -5,7 +5,6 @@ let passport=require('passport');
 const router = require('../../routes/farmStand');
 const saltRounds = 10;
 module.exports={
-
 registerAdmin: async function(req,res){
     if(req.body.name==undefined||req.body.name==null){
         return res.status(200).json({

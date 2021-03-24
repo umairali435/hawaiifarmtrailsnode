@@ -67,7 +67,7 @@
                     <p class="text-muted">Sign in to continue to Hawaii farm trails.</p>
                 </div>
 
-                <form method="post" id="loginAdmin">
+                <form method="post" id="loginAdmin" action="/FarmStand/AdminDashboard">
                     <div class="input-group mb-3">
                         <input type="email" name="email" class="form-control" placeholder="Email">
                         <div class="input-group-append">
@@ -127,7 +127,7 @@
             $('.loading').css('display', 'block');
             $.ajax({
                 type: "POST",
-                url: '/FarmStand/Admin',
+                url: '/FarmStand/AdminDashboard',
                 processData: false,
                 contentType: false,
                 data: new FormData(this),
