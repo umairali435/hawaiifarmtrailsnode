@@ -7,7 +7,7 @@ const path = require('path');
 let multer = require("multer");
 bcrypt = require('bcryptjs'),
 require('dotenv').config();
-const User=require('/All Data/hawaiifarmtrails/models/adminuser');
+const User=require('../hawaiifarmtrails/models/adminuser');
 passport = require('passport');
 cors = require("cors"),
 LocalStrategy = require("passport-local");
