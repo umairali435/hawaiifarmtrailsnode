@@ -2,7 +2,7 @@ const express=require('express');
 const router=express.Router();
 const Product=require('../scripts/farmstandScript');
 const User=require('../scripts/userScript');
-const AdminUser=require('../../hawaiifarmtrails/scripts/admin/adminlogin');
+const AdminUser=require('../models/adminuser');
 const multer=require('multer');
 const storage=multer.diskStorage({
     destination:'uploads/',
