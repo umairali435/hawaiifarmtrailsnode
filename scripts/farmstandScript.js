@@ -245,11 +245,7 @@ module.exports={
             if(err){
                 console.log(err);
             }else{
-                res.status(200).json({
-                   "Success":true,
-                   "message":"Farm and Ranches Added Successfully",
-                
-                });
+                res.redirect('Farms&Ranches');
             }
            });
     },

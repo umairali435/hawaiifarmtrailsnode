@@ -1,6 +1,7 @@
 const express=require('express');
 const router=express.Router();
 const Product=require('../scripts/farmstandScript');
+const GetFarmAndRanches=require('../scripts/admin/admingetdatas');
 const User=require('../scripts/userScript');
 const AdminUser=require('../scripts/admin/adminlogin');
 const multer=require('multer');
@@ -30,7 +31,7 @@ router.get('/getevents',(req,res)=>{
     res.render('events');
 });
 router.get('/Farms&Ranches',(req,res)=>{
-    res.render('Farms&Ranches');
+    GetFarmAndRanches.getFarmAndRanchesAdmin(req,res);
 });
 router.post('/events',(req,res)=>{
     res.render('events');

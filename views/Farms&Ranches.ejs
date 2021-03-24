@@ -125,6 +125,7 @@
     <div class="card-body">
       <table class="table table-bordered border-primary">
         <thead>
+          
           <tr>
             <th>Product Name</th>
             <th>Product Price</th>
@@ -136,19 +137,26 @@
 
             <th>Delete</th>
           </tr>
+          
+<% if(locals.farmandranch) { %>
+  <% var sr = 1; farmandranch.forEach((farm) => { %>
           <tr>
-            <td>chawal</td>
-            <td>123</td>
-            <td>Dir kha chawal de ror mi</td>
-            <td>12:00am</td>
-            <td>6:00pm</td>
-            <td>Education</td>
-            <td>Animals</td>
+            <td><%= farm.name %></td>
+            <td><%= farm.price %></td>
+            <td><%= farm.details %></td>
+            <td><%= farm.timeFrom %></td>
+            <td><%= farm.timeTo %></td>
+            <td><%= farm.Types %></td>
+            <td><%= farm.features %></td>
 
             <td>
               <input type="button" name="" value="Delete" id="delete">
             </td>
           </tr>
+          
+
+<% sr++; }); %>
+<% } %>
         </thead>
 
       </table>
@@ -183,7 +191,7 @@ $.ajax({
     success: function (data) {
         $('.loading').css('display', 'none');
         console.log(data);
-        window.location = "/admin/app-manage-banners";
+        window.location = "/FarmStand/Farms&Ranches";
 
     }
 });
