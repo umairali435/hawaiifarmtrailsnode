@@ -25,14 +25,21 @@ const upload =multer({storage:storage,limits:{
 router.get('/Admin',(req,res)=>{
     res.render('demo');
 });
-router.post('/AdminDashboard',(req,res,next)=>{
-    AdminUser.loginAdmin(req,res,next);
-});
-router.get('/getevents',(req,res)=>{
+router.post('/Admin',(req,res)=>{
+    AdminUser.loginAdmin(req,res);
+}); 
+router.get('/events',(req,res)=>{
     res.render('events');
 });
 router.get('/Farms&Ranches',(req,res)=>{    
     GetFarmAndRanches.getFarmAndRanchesAdmin(req,res);
+
+});
+router.get('/findaCSA',(req,res)=>{
+   GetFarmAndRanches.getFindCSA(req,res)
+});
+router.post('/findaCSA',(req,res)=>{
+    Product.CsaProduct(req,res);
 });
 router.post('/events',(req,res)=>{
     res.render('events');
