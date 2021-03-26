@@ -42,12 +42,17 @@ router.get('/findaCSA',(req,res)=>{
 router.post('/findaCSA',upload.single('image'),(req,res)=>{
     Product.CsaProduct(req,res);
 });
-router.post('/events',(req,res)=>{
-    res.render('events');
+// ---------------------------------------events---
+// router.get('/events',(req,res)=>{
+//     res.render('Events');
+// });
+router.get('/events',(req,res)=>{
+    GetFarmAndRanches.getEvent(req,res)
 });
-router.post('/getevents',upload.single('image'),(req,res)=>{
-Product.famstandAddproduct(req,res);
+router.post('/events',upload.single('image'),(req,res)=>{
+Product.AddEvents(req,res);
 });
+// ----------------------------
 router.post('/csa/addProduct',upload.single('image'),(req,res)=>{
 Product.CsaProduct(req,res);
 });
@@ -80,5 +85,15 @@ router.get('/getFarmAndRanches',(req,res)=>{
 
 router.get('/events',(req,res)=>{
     Product.getEvents(req,res);
+});
+// ----------------for Types-----------------
+router.get('/types',(req,res)=>{
+    GetFarmAndRanches.typesGet(req,res);
+});
+router.post('/types',(req,res)=>{
+    Product.types(req,res);
+});
+router.get('/gettypes',(req,res)=>{
+ Product.gettypes(req,res);
 });
 module.exports=router;

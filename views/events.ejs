@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Events</title>
+    <!-- <link rel="stylesheet" href="../public/css/style.css"> -->
     <link rel="stylesheet" href="../css/style.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">  </head>
   <body>
@@ -14,17 +15,17 @@
     <br>
     <div class="container">
      <div class="card">
-       <div class="card-header" id="card_header">
+       <div class="card-header bg-primary" id="card_header">
              <h4 style="color:white">Events</h4>
        </div>
        <div class="card-body">
-         <form class="card-text" method="post"> 
+         <form class="card-text" id="events1" method="post"  enctype="multipart/form-data">
      <div class="row">
        <div class="col">
-         <input type="text" class="form-control" placeholder="Product Name" id="name" name="name" required>
+         <input type="text" class="form-control" placeholder="Product Name" name="name" required>
        </div>
        <div class="col">
-         <input type="number" class="form-control" placeholder="Product Price" name="Price" required>
+         <input type="number" class="form-control" placeholder="Discount" name="discount" required>
        </div>
        </div>
        <br>
@@ -33,47 +34,81 @@
            <input type="text" class="form-control" placeholder="Product Details" name="details" required>
          </div>
          <div class="col">
-           <input type="file" class="form-control" placeholder="Product Image" name="image" accept=".jpg, .jpeg, .png" required>
+           <input type="file" class="form-control" id="image" placeholder="Product Image" name="image" accept=".jpg, .jpeg, .png" required>
          </div>
 
        </div>
        <br>
        <div class="row">
          <div class="col">
-           <input type="time" class="form-control" placeholder="Opening Time" name="openingtime" required>
+           <input type="time" class="form-control" placeholder="Opening Time" name="timeFrom" required>
          </div>
          <div class="col">
-           <input type="time" class="form-control" placeholder="Closing Time" name="closingtime" required>
+           <input type="time" class="form-control" placeholder="Closing Time" name="timeTo" required>
          </div>
 
        </div>
        <br>
+       <div class="row">
+        <div class="col">
+          <input type="number" class="form-control" placeholder="Contact" name="contact" required>
+        </div>
+        <div class="col">
+          <input type="text" class="form-control" placeholder="Website Link" name="website" required>
+        </div>
+        </div>
+        <br>
+       <div class="row">
+        <div class="col">
+          <input type="number" class="form-control" placeholder="Latitude" name="lat" required>
+        </div>
+        <div class="col">
+          <input type="number" class="form-control" placeholder="Longtitude" name="lng" required>
+        </div>
+        </div>
+        <br>
+        <div class="row">
+         <div class="col">
+            <select class="custom-select form-control " id="gender2" name="months">
+              <option selected>Mounths</option>
+              <option value="January">January</option>
+              <option value="February">February</option>
+              <option value="March">March</option>
+              <option value="April">April</option>
+              <option value="May">May</option>
+              <option value="Jun">Jun</option>
+              <option value="July">July</option>
+              <option value="August">August</option>
+              <option value="September">September</option>
+              <option value="October">October</option>
+              <option value="November">November</option>
+              <option value="December">December</option>
+             </select>
+            </div>
+         </div>
+       <br>
    <div class="row">
        <div class="col-6">
-         <select class="custom-select form-control " id="gender2">
-           <option selected>Types</option>
-           <option value="1">Education</option>
-           <option value="2">Farm to tables</option>
-           <option value="3">Tour</option>
-           <option value="4">Farmstand</option>
-         </select>
+        <input type="text" placeholder="Enter types" class="form-control" name="typess">
          </div>
          <div class="col-6">
-           <select class="custom-select form-control " id="gender2">
+           <select class="custom-select form-control " id="gender2" name="features">
              <option selected>Features</option>
              <option value="1">Alcohal</option>
              <option value="2">Animals</option>
 
            </select>
-           </div>
-
+          </div>
+       
+       <br>
        <br>
        <br>
        <div class="col-12" id="aa">
          <div class="row">
+
                <div class="col-12">
-                 <!-- <button>upload</button> -->
-                 <input type="submit",value="upload">
+                 <input class="submit_button bg-primary" type="submit" name="" value="Upload">
+
                </div>
                <br><br>
 
@@ -89,40 +124,99 @@
   <!-- </div> -->
 </div>
 </div>
-<!-- <script> $("#loginAdmin").submit(function (e) {
-  e.preventDefault(); // avoid to execute the actual submit of the form.
-  $('.loading').css('display', 'block');
-  $.ajax({
-      type: "POST",
-      url: '/FarmStand/events',
-      processData: false,
-      contentType: false,
-      data: new FormData(this),
-      // serializes the form's elements.
-      success: function (data) {
-          console.log("fff");
-          $('.loading').css('display', 'none');
-          if (data && data.message) {
-              $('#error_message').addClass('alert alert-warning');
-              $('#error_message').removeClass('alert alert-success');
-              $('#error_message').text(data.message);
-          }
-          else if (data && data.success == true) {
-              $('#error_message').removeClass('alert alert-warning');
-              $('#error_message').addClass('alert alert-success');
-              $('#error_message').text('Login Successful!');
-              window.location = "/admin/dashboard";
-          }
-          else {
-              $('#error_message').addClass('alert alert-warning');
-              $('#error_message').removeClass('alert alert-success');
-              $('#error_message').text(data);
-          }
-      }
-  });
+<br><br>
+<div class="container">
+  <div class="card">
+    <div class="card-header bg-primary">
+       <h3 style="color:white">Events </h3>
+    </div>
+    <div class="card-body">
+      <table class="table table-bordered border-primary">
+        <thead>
+          
+          <tr>
+            <th>Product Name</th>
+            <th>Discount</th>
+            <th>Product <br> Details</th>
+            <th>Opening Time</th>
+            <th>Closing Time</th>
+            <th>Months</th>
+            <th>Types</th>
+            <th>Features</th>
 
+            <th>Delete</th>
+          </tr>
+          
+<% if(locals.mainEvent) { %>
+  <% var sr = 1; mainEvent.forEach((evn) => { %>
+          <tr>
+            <td><%= evn.name %></td>
+            <td><%= evn.discount %></td>
+            <td><%= evn.details %></td>
+            <td><%= evn.timeFrom %></td>
+            <td><%= evn.timeTo %></td>
+            <td><%= evn.months%></td>
+           <td> <% if(locals.maintype) { %>
+            <% var srr = 1; maintype.forEach((market) => { %>
+              <td><%= market.typess %></td>
+              <% srr++; }); %>  
+              <% } %></td>
+            <td><%= evn.features %></td>
 
-});</script> -->
+            <td>
+              <input type="button" name="" value="Delete" id="delete">
+            </td>
+          </tr>
+          
+
+<% sr++; }); %>
+<% } %>
+<!-- <% if(locals.maintype) { %>
+  <% var srr = 1; maintype.forEach((market) => { %>
+    <td><%= market.name %></td>
+    <% srr++; }); %>
+    <% } %> -->
+        </thead>
+
+      </table>
+
+      </div>
+      <div class="card-footer">
+        .
+      </div>
+
+    </div>
+  </div>
+</div>
+<br>
+<script>
+  
+  $("#events1").submit(function (e) {
+
+e.preventDefault(); // avoid to execute the actual submit of the form.
+$('.loading').css('display', 'block');
+var files = $('#image')[0].files;
+formDataAll = new FormData(this)
+if(files.length > 0 ){
+  fd.append('image',files[0]);
+$.ajax({
+    type: "POST",
+    url: '/FarmStand/getevents',
+    processData: false,
+    contentType: false,
+    enctype: 'multipart/form-data',
+    data: formDataAll,
+    // serializes the form's elements.
+    success: function (data) {
+        $('.loading').css('display', 'none');
+        console.log(data);
+        window.location = "/FarmStand/getevents";
+
+    }
+});
+}
+});
+</script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>  </body>
 </html>

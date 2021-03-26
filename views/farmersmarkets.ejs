@@ -182,7 +182,7 @@ if(files.length > 0 ){
   fd.append('image',files[0]);
 $.ajax({
     type: "POST",
-    url: '/FarmStand/FarmerMarkets',
+    url: '/FarmStand/findaCSA',
     processData: false,
     contentType: false,
     enctype: 'multipart/form-data',
@@ -191,7 +191,7 @@ $.ajax({
     success: function (data) {
         $('.loading').css('display', 'none');
         console.log(data);
-        window.location = "/FarmStand/FarmerMarkets";
+        window.location = "/FarmStand/findaCSA";
 
     }
 });

@@ -4,6 +4,7 @@ const CommunitySupportedAgriculture=require('../models/csa');
 const Farmandranches=require('../models/farmandranches');
 const FarmerMarkets=require('../models/farmermarkets');
 const Events=require('../models/events');
+const GetTypes=require('../models/types');
 module.exports={
     famstandAddproduct: async function(req,res){
         if(req.body.name==undefined||req.body.name==null){
@@ -235,7 +236,7 @@ module.exports={
         farmandranches.timeFrom=req.body.timeFrom;
         farmandranches.timeTo=req.body.timeTo;
         farmandranches.contact=req.body.contact;
-        farmandranches.lat=req.body.lat;
+        farmandranches.search=req.body.search;
         farmandranches.lng=req.body.lng;
         farmandranches.website=req.body.website;
         farmandranches.image=req.file.path;
@@ -395,8 +396,14 @@ module.exports={
                 "message":"please enter your longitude",
             });
         }
+        if(req.body.discount==undefined||req.body.discount==null){
+            return res.status(200).json({
+                "Success":false,
+                "message":"please enter your discount",
+            });
+        }
         
-        if(req.body.month==undefined||req.body.month==null){
+        if(req.body.months==undefined||req.body.months==null){
             return res.status(200).json({
                 "Success":false,
                 "message":"please enter your Event month",
@@ -413,17 +420,15 @@ module.exports={
         events.lat=req.body.lat;
         events.lng=req.body.lng;
         events.website=req.body.website;
-        events.image=req.file.path;
-        events.month=req.body.month;
+        events.image=req.file.path;       
+        events.discount=req.body.discount;
+        events.months=req.body.months;
         events.save(async function (err, product) {
             if(err){
                 console.log(err);
             }else{
-                res.status(200).json({
-                   "Success":true,
-                   "message":"Event Added Successfully",
-                
-                });
+                res.redirect('Events')
+
             }
            });
     },
@@ -433,6 +438,38 @@ module.exports={
             return res.status(200).json({
                 "Success":true,
                 "Events":events,
+            });
+        } catch (error) {
+            
+        }
+    },
+    types: async function(req,res){
+        if(req.body.typess==undefined||req.body.typess==null){
+            return res.status(200).json({
+                "Success":false,
+                "message":"please enter your Event name",
+            });
+        }
+        let gettype=GetTypes();
+        gettype._id=mongoose.Types.ObjectId();
+        gettype.typess=req.body.typess;
+        gettype.save(async function(err,typess){
+            if(err){
+                console.log(err);
+            }
+            else{
+                res.redirect('Types')
+
+            }
+        });
+
+    },
+    gettypes : async function(req,res){
+        try {
+            let typess=await GetTypes.find();
+            return res.status(200).json({
+                "Success":true,
+                "Types":typess,
             });
         } catch (error) {
             

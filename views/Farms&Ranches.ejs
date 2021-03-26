@@ -60,7 +60,7 @@
         <br>
        <div class="row">
         <div class="col">
-          <input type="number" class="form-control" placeholder="Latitude" name="lat" required>
+          <input type="text" class="form-control" placeholder="search" name="search" id="search_place" required>
         </div>
         <div class="col">
           <input type="number" class="form-control" placeholder="Longtitude" name="lng" required>
@@ -197,7 +197,18 @@ $.ajax({
 });
 }
 });
+
+</script>
+<script>
+  function activePlacesSearch(){
+    var input= document.getElementById('search_place');
+    var autocomplete = new google.maps.places.Autocomplete(input);
+  }
+</script>
+<script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvLEhg1B9Wi7uPYKRvSHsDPo-HRFAadcE&libraries=places&callback=activePlacesSearch">
 </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>  </body>
+
 </html>
