@@ -4,6 +4,7 @@ const CommunitySupportedAgriculture=require('../models/csa');
 const Farmandranches=require('../models/farmandranches');
 const FarmerMarkets=require('../models/farmermarkets');
 const Events=require('../models/events');
+const Favourite=require('../models/favourite');
 module.exports={
     famstandAddproduct: async function(req,res){
         if(req.body.name==undefined||req.body.name==null){
@@ -237,6 +238,8 @@ module.exports={
         farmandranches.contact=req.body.contact;
         farmandranches.lat=req.body.lat;
         farmandranches.lng=req.body.lng;
+        farmandranches.nearlat=Math.floor(req.body.lat);
+        farmandranches.nearlng=Math.floor(req.body.lng);
         farmandranches.website=req.body.website;
         farmandranches.image=req.file.path;
         farmandranches.features=req.body.features;
@@ -251,11 +254,46 @@ module.exports={
     },
     getFarmAndRanches : async function(req,res){
         try {
+            let allProducts = [];
             let products=await Farmandranches.find();
+            if(products != null && products !=""){
+                for (const product of products) {
+                    let isfavourite = false;
+                    let mainObject = {}
+                    let favourite = await Favourite.findOne({user : req.params.userId,product : product._id});
+                    if(favourite != null && favourite !=""){
+                        isfavourite = true;
+                    }
+                    mainObject.isfavourite = isfavourite;
+                    mainObject.product = product;
+                    await allProducts.push(mainObject);
+
+                }
+            }
+            return res.status(200).json({
+                "Success":true,
+                "FarmAndRanches":allProducts,
+            });
+        } catch (error) {
+            
+        }
+    },
+    getFarmAndRanchesbylatandlng : async function(req,res){
+        try {
+            if(req.params.lat!=null||req.params.lng!=null&&req.params.lat!=undefined||req.params.lng!=undefined){
+            let products=await Farmandranches.find({
+                $or:[
+                    {
+                        nearlat:Math.floor(req.params.lat),
+                        nearlng:Math.floor(req.params.lng),
+                    }
+                ]
+            });
             return res.status(200).json({
                 "Success":true,
                 "FarmAndRanches":products,
             });
+            }
         } catch (error) {
             
         }
@@ -440,4 +478,54 @@ module.exports={
             
         }
     },
+    addFavourite:async function(req,res){
+        console.log("adding to fav");
+        if(req.body.postId==undefined||req.body.postId==null){
+            return res.status(200).json({
+                "Success":false,
+                "message":"please provide postId",
+            });
+        }
+        if(req.body.userId==undefined||req.body.userId==null){
+            return res.status(200).json({
+                "Success":false,
+                "message":"please provide userId",
+            });
+        }
+        let foundfav = await Favourite.findOne({product : req.body.postId, user : req.body.userId});
+            console.log(foundfav);
+            if(foundfav != null && foundfav !=''){
+                await foundfav.remove();
+                return res.send({'Success' : true,'message' : 'Product removed from Favourites'})
+            }else{
+                let newFav =  Favourite();
+                newFav.user = req.body.userId;
+                newFav.product = req.body.postId;
+                await newFav.save(async function (err, product){
+                    if(err){
+                        console.log(err);
+                    }else{
+                        res.status(200).json({
+                           "Success":true,
+                           "message":" Added Successfully",
+                        });
+                    }
+                });
+            }
+    },
+    getFavProducts:async function(req,res){
+        try {
+            if(req.body.userId == '' || req.body.userId == undefined){
+                return res.send({'Success' : false,'message' : 'User id is required.'})
+            }
+            let products=await Favourite.find({user:req.body.userId}).populate({
+                path:'product',
+                model:'Farmandranches',
+                select:'name price details image lat lng'
+            });
+            return res.send({'Success' : true,'products' : products});
+        } catch (error) {
+            
+        }
+    }
 }

@@ -59,15 +59,26 @@ Product.AddFarmerMarkets(req,res);
 router.post('/AddEvent',upload.single('image'),(req,res)=>{
 Product.AddEvents(req,res);
 });
+router.post('/AddtoFavourites',(req,res)=>{
+    Product.addFavourite(req,res);
+});
+router.post('/getFavourites',(req,res)=>{
+    Product.getFavProducts(req,res);
+});
 router.get('/farmStand/getAllProducts',(req,res)=>{
     Product.getAllProducts(req,res);
 });
 router.get('/csa/getProducts',(req,res)=>{
     Product.getAllCsaProducts(req,res);
     });
-router.get('/getFarmAndRanches',(req,res)=>{
+
+router.get('/getFarmAndRanches/:userId',(req,res)=>{
     Product.getFarmAndRanches(req,res);
 });
+router.get('/getFarmAndRanches/:lat/:lng',(req,res)=>{
+    Product.getFarmAndRanchesbylatandlng(req,res);
+});
+
 router.get('/getFarmerMarkets',(req,res)=>{
     Product.getFarmerMarkets(req,res);
 });
