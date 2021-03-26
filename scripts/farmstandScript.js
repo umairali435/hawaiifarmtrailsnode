@@ -137,6 +137,7 @@ module.exports={
         communitySuppertedAgriculture.timeFrom=req.body.timeFrom;
         communitySuppertedAgriculture.timeTo=req.body.timeTo;
         communitySuppertedAgriculture.contact=req.body.contact;
+        communitySuppertedAgriculture.type=req.body.type;
         communitySuppertedAgriculture.lat=req.body.lat;
         communitySuppertedAgriculture.lng=req.body.lng;
         communitySuppertedAgriculture.website=req.body.website;
@@ -146,11 +147,10 @@ module.exports={
             if(err){
                 console.log(err);
             }else{
-                res.status(200).json({
-                   "Success":true,
-                   "message":"product Posted Successfully",
+                res.redirect('findaCSA')
                 
-                });
+                
+                
             }
            });
     },
@@ -372,11 +372,9 @@ module.exports={
             if(err){
                 console.log(err);
             }else{
-                res.status(200).json({
-                   "Success":true,
-                   "message":"Farmer Market Added Successfully",
-                
-                });
+                   res.redirect('FarmerMarkets')
+                //    res.redirect('findaCSA')
+
             }
            });
     },
@@ -469,7 +467,7 @@ module.exports={
     },
     getEvents : async function(req,res){
         try {
-            let events=await Events.find();
+            let events=await Events.find({});
             return res.status(200).json({
                 "Success":true,
                 "Events":events,
