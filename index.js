@@ -5,6 +5,7 @@ const bodyparser=require("body-parser");
 const fs=require('fs');
 const path = require('path');
 let multer = require("multer");
+const morgan = require('morgan');
 bcrypt = require('bcryptjs'),
 require('dotenv').config();
 const User=require('./models/adminuser');
@@ -16,9 +17,9 @@ app.set('view engine', 'ejs');
 app.use('/admin', express.static(__dirname + '/admin'));
 app.use('/uploads', express.static(__dirname + '/uploads'));
 app.use(express.static(path.join(__dirname+'/public')));  
-
+app.use(morgan('combined'));
 app.set('views', path.join(__dirname, 'views'));
-app.use(bodyparser.urlencoded({extended:false}));
+app.use(bodyparser.urlencoded({extended:true}));
 app.use(bodyparser.json());
 let dbUser = process.env.DB_USERNAME;
 let dbPass = process.env.DB_PASSWORD;

@@ -1,5 +1,6 @@
 const express=require('express');
 const router=express.Router();
+let passport = require('passport');
 const Product=require('../scripts/farmstandScript');
 // const csa=require('../scripts/farmstandScript');
 const GetFarmAndRanches=require('../scripts/admin/admingetdatas');
@@ -31,7 +32,7 @@ router.post('/Admin',(req,res)=>{
 router.get('/eventstwo',(req,res)=>{
     res.render('events');
 });
-router.get('/Farms&Ranches',(req,res)=>{
+router.get('/Farms&Ranches',(req,res)=>{    
     GetFarmAndRanches.getFarmAndRanchesAdmin(req,res);
 
 });
@@ -73,16 +74,29 @@ Product.AddFarmerMarkets(req,res);
 router.post('/AddEvent',upload.single('image'),(req,res)=>{
 Product.AddEvents(req,res);
 });
+router.post('/AddtoFavourites',(req,res)=>{
+    Product.addFavourite(req,res);
+});
+router.post('/getFavourites',(req,res)=>{
+    Product.getFavProducts(req,res);
+});
 router.get('/farmStand/getAllProducts',(req,res)=>{
     Product.getAllProducts(req,res);
 });
 router.get('/csa/getProducts',(req,res)=>{
     Product.getAllCsaProducts(req,res);
     });
-router.get('/getFarmAndRanches',(req,res)=>{
+
+router.get('/getFarmAndRanches/:userId',(req,res)=>{
     Product.getFarmAndRanches(req,res);
 });
+router.get('/getFarmAndRanches/:lat/:lng',(req,res)=>{
+    Product.getFarmAndRanchesbylatandlng(req,res);
+});
 
+router.get('/getFarmerMarkets',(req,res)=>{
+    Product.getFarmerMarkets(req,res);
+});
 router.get('/events',(req,res)=>{
     Product.getEvents(req,res);
 });

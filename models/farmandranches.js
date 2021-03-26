@@ -8,6 +8,8 @@ const farmandranches=mongoose.Schema({
     type:{type:String},
     lat:{type:String},
     lng:{type:String},
+    nearlat:{type:String},
+    nearlng:{type:String},
     website:{type:String},
     contact:{type:String},
     timeFrom:{type:String},
