@@ -85,7 +85,6 @@ router.get('/csa/getProducts',(req,res)=>{
 router.get('/getFarmAndRanches/:userId',(req,res)=>{
     Product.getFarmAndRanches(req,res);
 });
-<<<<<<< HEAD
 router.get('/getFarmAndRanches/:lat/:lng',(req,res)=>{
     Product.getFarmAndRanchesbylatandlng(req,res);
 });
@@ -93,9 +92,6 @@ router.get('/getFarmAndRanches/:lat/:lng',(req,res)=>{
 router.get('/getFarmerMarkets',(req,res)=>{
     Product.getFarmerMarkets(req,res);
 });
-=======
-
->>>>>>> c50963b59b0ade7a939b8356cc94b5d46b84915c
 router.get('/events',(req,res)=>{
     Product.getEvents(req,res);
 });
