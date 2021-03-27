@@ -313,7 +313,7 @@ module.exports={
             }
             return res.status(200).json({
                 "Success":true,
-                "FarmAndRanches":products,
+                "FarmAndRanches":allProducts,
             });
             }
         } catch (error) {

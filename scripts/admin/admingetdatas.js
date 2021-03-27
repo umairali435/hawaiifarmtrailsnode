@@ -46,6 +46,6 @@ module.exports={
     // ----------------island------
     islandGet:async function(req,res){
         let mainisland=await Island.find({});
-        res.render('Option',{mainisland});
+        res.render('Island',{mainisland});
     },
 }
