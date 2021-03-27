@@ -794,11 +794,11 @@ module.exports={
                 return res.send({'Success' : false,'message' : 'User id is required.'})
             }
             let products=await Favourite.find({user:req.body.userId}).populate({
-                path:'product',
+                path:'Fproduct',
                 model:'Farmandranches',
                 select:'name price details image lat lng'
             }).populate({
-                path:'product',
+                path:'Sproduct',
                 model:'FarmerMarkets',
                 select:'name price details image lat lng'   
             });
