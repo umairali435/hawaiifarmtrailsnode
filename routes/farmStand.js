@@ -81,6 +81,13 @@ router.post('/AddtoFavourites',(req,res)=>{
 router.post('/getFavourites',(req,res)=>{
     Product.getFavProducts(req,res);
 });
+// ------------------formstand-------------
+router.get('/formstand',(req,res)=>{
+    GetFarmAndRanches.getFarmstand(req,res);
+});
+router.post('/formstand'),upload.single('image'),(req,res)=>{
+    Product.famstandAddproduct(req,res);
+}
 router.get('/farmStand/getAllProducts',(req,res)=>{
     Product.getAllProducts(req,res);
 });

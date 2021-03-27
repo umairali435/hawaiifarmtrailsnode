@@ -7,6 +7,7 @@ const Types=require("../../models/types");
 const Feature=require("../../models/features");
 const Option=require("../../models/option");
 const Island=require("../../models/island");
+const FarmStand=require("../../models/farmstand");
 module.exports={
     getFarmAndRanchesAdmin: async function(req,res){
      let farmandranch=await Farmandranches.find({});
@@ -32,6 +33,13 @@ module.exports={
         let mainisland=await Island.find({});
    
         res.render('farmersmarkets',{farmersMarkets,maintype,mainfeature,mainoption,mainisland});
+    },
+    // ------------------farmstand---------
+    getFarmstand:async function(req,res){
+        let farmStand =await FarmStand.find({});
+        let maintype=await Types.find({});
+       
+        res.render('farmersmarkets',{farmStand,maintype,mainfeature,mainoption,mainisland});
     },
     // -----------------Event--------------
     getEvent:async function(req,res){
