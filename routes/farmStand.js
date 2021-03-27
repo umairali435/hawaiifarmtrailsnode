@@ -121,4 +121,24 @@ router.post('/features',(req,res)=>{
 router.get('/getfeatures',(req,res)=>{
     Product.getfeatures(req,res);
    });
+//    ------------------- for option----
+router.get('/option',(req,res)=>{
+    GetFarmAndRanches.optionGet(req,res);
+    });
+router.post('/option',(req,res)=>{
+    Product.mainoption(req,res);
+}); 
+router.get('/getoption',(req,res)=>{
+    Product.getoption(req,res);
+   });
+//    -----------------------for island----------
+router.get('/island',(req,res)=>{
+    GetFarmAndRanches.islandGet(req,res);
+    });
+router.post('/island',(req,res)=>{
+    Product.mainisland(req,res);
+}); 
+router.get('/getisland',(req,res)=>{
+    Product.getisland(req,res);
+   });
 module.exports=router;

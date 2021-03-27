@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Features</title>
+    <title>Options</title>
     <!-- <link rel="stylesheet" href="../public/css/style.css"> -->
     <link rel="stylesheet" href="../css/style.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">  </head>
@@ -16,7 +16,7 @@
     <div class="container">
      <div class="card">
        <div class="card-header bg-primary" id="card_header">
-             <h4 style="color:white">Features</h4>
+             <h4 style="color:white">Options</h4>
        </div>
        <div class="card-body">
          <form class="card-text" id="mType" method="post" >
@@ -54,20 +54,20 @@
 <div class="container">
   <div class="card">
     <div class="card-header bg-primary">
-       <h3 style="color:white">Features </h3>
+       <h3 style="color:white">Options </h3>
     </div>
     <div class="card-body">
       <table class="table table-bordered border-primary">
         <thead>
           
           <tr>
-            <th>Features Name</th>
+            <th>Option Name</th>
 
             <th>Delete</th>
           </tr>
           
-<% if(locals.mainfeature) { %>
-  <% var sr = 1; mainfeature.forEach((market) => { %>
+<% if(locals.mainoption) { %>
+  <% var sr = 1; mainoption.forEach((market) => { %>
           <tr>
             <td><%= market.typess %></td>
             
@@ -105,7 +105,7 @@ if(files.length > 0 ){
   fd.append('image',files[0]);
 $.ajax({
     type: "POST",
-    url: '/FarmStand/features',
+    url: '/FarmStand/option',
     processData: false,
     contentType: false,
     // enctype: 'multipart/form-data',
@@ -114,7 +114,7 @@ $.ajax({
     success: function (data) {
         $('.loading').css('display', 'none');
         console.log(data);
-        window.location = "/FarmStand/features";
+        window.location = "/FarmStand/option";
 
     }
 });
