@@ -143,4 +143,7 @@ router.post('/island',(req,res)=>{
 router.get('/getisland',(req,res)=>{
     Product.getisland(req,res);
    });
+router.get('/getfromtypesopions/:userId/:type',(req,res)=>{
+    Product.getFarmAndRanchesbyTypes(req,res);
+   });
 module.exports=router;
