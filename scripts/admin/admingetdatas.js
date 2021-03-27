@@ -11,7 +11,12 @@ module.exports={
     getFarmAndRanchesAdmin: async function(req,res){
      let farmandranch=await Farmandranches.find({});
      let maintype=await Types.find({});
-     res.render('Farms&Ranches',{farmandranch,maintype});
+     let mainfeature=await Feature.find({});
+     let mainoption=await Option.find({});
+     let mainisland=await Island.find({});
+
+
+     res.render('Farms&Ranches',{farmandranch,maintype,mainfeature,mainoption,mainisland});
     },
     // ------------findCSA--------------
     getFindCSA: async function(req,res){  //function name
@@ -21,7 +26,12 @@ module.exports={
     //  ------------------Farmers Markets----------
     getFarmersMarkets:async function(req,res){
         let farmersMarkets =await FarmerMarkets.find({});
-        res.render('farmersmarkets',{farmersMarkets});
+        let maintype=await Types.find({});
+        let mainfeature=await Feature.find({});
+        let mainoption=await Option.find({});
+        let mainisland=await Island.find({});
+   
+        res.render('farmersmarkets',{farmersMarkets,maintype,mainfeature,mainoption,mainisland});
     },
     // -----------------Event--------------
     getEvent:async function(req,res){

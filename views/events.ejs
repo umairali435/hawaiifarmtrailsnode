@@ -69,7 +69,7 @@
         <br>
         <div class="row">
          <div class="col">
-            <select class="custom-select form-control " id="gender2" name="months">
+            <select class="custom-select form-control " id="gender2" name="months" required>
               <option selected>Mounths</option>
               <option value="January">January</option>
               <option value="February">February</option>
@@ -89,26 +89,7 @@
        <br>
        
    <div class="row">
-       <div class="col-6">
-        <select class="custom-select form-control " id="gender2" name="typess">
-          <option selected>Types</option>
-          <option value="1"><script> if(locals.maintype) {
-             var srr = 1; maintype.forEach((market) => {
-               market.typess 
-              srr++; }); 
-              } </script></option>
  
-
-        </select>         </div>
-         <div class="col-6">
-           <select class="custom-select form-control " id="gender2" name="features">
-             <option selected>Features</option>
-             <option value="1">Alcohal</option>
-             <option value="2">Animals</option>
-
-           </select>
-          </div>
-       
        <br>
        <br>
        <br>
@@ -150,9 +131,7 @@
             <th>Opening Time</th>
             <th>Closing Time</th>
             <th>Months</th>
-            <th>Types</th>
-            <th>Features</th>
-
+            
             <th>Delete</th>
           </tr>
           
@@ -165,8 +144,7 @@
             <td><%= evn.timeFrom %></td>
             <td><%= evn.timeTo %></td>
             <td><%= evn.months%></td>
-           <td> <%= evn.typess%></td>
-            <td><%= evn.features %></td>
+          
 
             <td>
               <input type="button" name="" value="Delete" id="delete">

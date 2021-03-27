@@ -12,6 +12,8 @@ const farmerMarkets=mongoose.Schema({
     contact:{type:String},
     timeFrom:{type:String},
     timeTo:{type:String},
-    features:{type:String},
+    type:{type:String},
+    option:{type:String},
+    island:{type:String},
 });
 module.exports=mongoose.model('FarmerMarkets',farmerMarkets);
