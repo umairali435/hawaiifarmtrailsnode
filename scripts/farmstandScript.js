@@ -798,7 +798,7 @@ module.exports={
                 model:'Farmandranches',
                 select:'name price details image lat lng'
             }).populate({
-                path:'products',
+                path:'product',
                 model:'FarmerMarkets',
                 select:'name price details image lat lng'   
             });
