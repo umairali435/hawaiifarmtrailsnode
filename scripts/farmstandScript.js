@@ -364,7 +364,7 @@ module.exports={
 
         }let allProducts = [];
         let products=await Farmandranches.find({
-        options:req.params.option,
+        options:req.params.options,
         });
         if(products != null && products !=""){
             for (const product of products) {
