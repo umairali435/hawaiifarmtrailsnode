@@ -486,6 +486,9 @@ module.exports={
         farmerMarkets.website=req.body.website;
         farmerMarkets.image=req.file.path;
         farmerMarkets.features=req.body.features;
+        farmerMarkets.type=req.body.type;
+        farmerMarkets.island=req.body.island;
+        farmerMarkets.option=req.body.option;
         farmerMarkets.save(async function (err, product) {
             if(err){
                 console.log(err);
