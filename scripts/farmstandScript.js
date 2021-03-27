@@ -489,7 +489,7 @@ module.exports={
         farmerMarkets.type=req.body.type;
         farmerMarkets.island=req.body.island;
         farmerMarkets.option=req.body.option;
-        farmerMarkets.save(async function (err, product) {
+        farmerMarkets.save(async function (err, products) {
             if(err){
                 console.log(err);
             }else{
