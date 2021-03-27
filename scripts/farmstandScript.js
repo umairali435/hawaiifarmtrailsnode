@@ -281,6 +281,8 @@ module.exports={
         }
     },
     getFarmAndRanchesbylatandlng : async function(req,res){
+        console.log(req.params.lat);
+        console.log(req.params.lng);
         try {
             if(req.params.lat!=null||req.params.lng!=null&&req.params.lat!=undefined||req.params.lng!=undefined){
             let products=await Farmandranches.find({
