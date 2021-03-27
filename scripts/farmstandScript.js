@@ -331,10 +331,28 @@ module.exports={
             });
 
         }
-        let product=await Farmandranches.find({types:req.params.type});
+        let allProducts = [];
+        let products=await Farmandranches.find({
+                    price:req.params.type,
+                    features:req.params.type,
+        });
+        if(products != null && products !=""){
+            for (const product of products) {
+                let isfavourite = false;
+                let mainObject = {}
+                let favourite = await Favourite.findOne({user : req.params.userId,product : product._id});
+                if(favourite != null && favourite !=""){
+                    isfavourite = true;
+                }
+                mainObject.isfavourite = isfavourite;
+                mainObject.product = product;
+                await allProducts.push(mainObject);
+
+            }
+        }
         return res.status(200).json({
             "Success":true,
-            "FarmAndRanches":product,
+            "FarmAndRanches":allProducts,
         });
     },getFarmAndRanchesbyOptions : async function(req,res){
         console.log(req.params.type);
