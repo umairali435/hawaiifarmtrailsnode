@@ -36,7 +36,7 @@ module.exports={
     // -----------------Event--------------
     getEvent:async function(req,res){
         let mainEvent=await Events.find({});
-        res.render('Events',{mainEvent});
+        res.render('events',{mainEvent});
     },
     // -----------------Types-----------------
     typesGet:async function(req,res){
