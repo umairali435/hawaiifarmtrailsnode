@@ -143,7 +143,13 @@ router.post('/island',(req,res)=>{
 router.get('/getisland',(req,res)=>{
     Product.getisland(req,res);
    });
-router.get('/getfromtypesopions/:userId/:type',(req,res)=>{
+router.get('/getfromtypes/:userId/:type',(req,res)=>{
     Product.getFarmAndRanchesbyTypes(req,res);
+   });
+router.get('/getfromtypes/:userId/:options',(req,res)=>{
+    Product.getFarmAndRanchesbyOptions(req,res);
+   });
+router.get('/getfromtypes/:userId/:islands',(req,res)=>{
+    Product.getFarmAndRanchesbyIslands(req,res);
    });
 module.exports=router;

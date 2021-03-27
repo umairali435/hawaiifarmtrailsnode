@@ -333,8 +333,7 @@ module.exports={
         }
         let allProducts = [];
         let products=await Farmandranches.find({
-                    price:req.params.type,
-                    features:req.params.type,
+                    types:req.params.type,
         });
         if(products != null && products !=""){
             for (const product of products) {
@@ -354,16 +353,33 @@ module.exports={
             "Success":true,
             "FarmAndRanches":allProducts,
         });
-    },getFarmAndRanchesbyOptions : async function(req,res){
-        console.log(req.params.type);
+    },
+    getFarmAndRanchesbyOptions : async function(req,res){
+        console.log(req.params.options);
         if(req.params.options==null||req.params.options==undefined){
             return res.status(200).json({
                 "Success":false,
                 "message":"please enter your options name",
             });
 
+        }let allProducts = [];
+        let products=await Farmandranches.find({
+        options:req.params.option,
+        });
+        if(products != null && products !=""){
+            for (const product of products) {
+                let isfavourite = false;
+                let mainObject = {}
+                let favourite = await Favourite.findOne({user : req.params.userId,product : product._id});
+                if(favourite != null && favourite !=""){
+                    isfavourite = true;
+                }
+                mainObject.isfavourite = isfavourite;
+                mainObject.product = product;
+                await allProducts.push(mainObject);
+
+            }
         }
-        let product=await Farmandranches.find({options:req.params.options});
         return res.status(200).json({
             "Success":true,
             "FarmAndRanches":product,
@@ -377,8 +393,24 @@ module.exports={
                 "message":"please enter your islands name",
             });
 
+        }let allProducts = [];
+        let products=await Farmandranches.find({
+                    islands:req.params.islands,
+        });
+        if(products != null && products !=""){
+            for (const product of products) {
+                let isfavourite = false;
+                let mainObject = {}
+                let favourite = await Favourite.findOne({user : req.params.userId,product : product._id});
+                if(favourite != null && favourite !=""){
+                    isfavourite = true;
+                }
+                mainObject.isfavourite = isfavourite;
+                mainObject.product = product;
+                await allProducts.push(mainObject);
+
+            }
         }
-        let product=await Farmandranches.find({islands:req.params.islands});
         return res.status(200).json({
             "Success":true,
             "FarmAndRanches":product,
