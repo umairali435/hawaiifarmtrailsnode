@@ -797,6 +797,10 @@ module.exports={
                 path:'product',
                 model:'Farmandranches',
                 select:'name price details image lat lng'
+            }).populate({
+                path:'product',
+                model:'FarmerMarkets',
+                select:'name price details image lat lng'   
             });
             return res.send({'Success' : true,'products' : products});
         } catch (error) {

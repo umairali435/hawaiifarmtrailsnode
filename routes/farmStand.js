@@ -100,7 +100,7 @@ router.get('/getFarmAndRanches/:userId/:type',(req,res)=>{
 router.get('/getFarmerMarkets/:userId',(req,res)=>{
     Product.getFarmerMarkets(req,res);
 });
-router.get('/events',(req,res)=>{
+router.get('/getevents',(req,res)=>{
     Product.getEvents(req,res);
 });
 // ----------------for Types-----------------

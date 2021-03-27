@@ -5,6 +5,10 @@ let favourite = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Farmandranches",
     },
+    product: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "FarmerMarkets",
+    },
     user:{
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
