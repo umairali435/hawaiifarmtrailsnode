@@ -382,7 +382,7 @@ module.exports={
         }
         return res.status(200).json({
             "Success":true,
-            "FarmAndRanches":product,
+            "FarmAndRanches":allProducts,
         });
     },
     getFarmAndRanchesbyIslands : async function(req,res){
@@ -413,7 +413,7 @@ module.exports={
         }
         return res.status(200).json({
             "Success":true,
-            "FarmAndRanches":product,
+            "FarmAndRanches":allProducts,
         });
     },
     AddFarmerMarkets : async function(req,res){
