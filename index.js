@@ -28,7 +28,7 @@ mongoose.connect(uri,{
   useCreateIndex: true,
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useFindAndModify: false
+  useFindAndModify: false,
 })  
 .then(()=>console.log('connected to db'))  
 .catch((err)=>console.log('connection error',err));
@@ -36,7 +36,8 @@ mongoose.Promise=global.Promise;
 app.use(require("express-session")({
   secret: "funtime",
   resave: true,
-  saveUninitialized: false
+  saveUninitialized: false,
+  
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -44,7 +45,9 @@ passport.use('local-login', new LocalStrategy({
   // by default, local strategy uses username and password, we will override with email
   usernameField: 'email',
   passwordField: 'password',
-  passReqToCallback: true // allows us to pass back the entire request to the callback
+  passReqToCallback: true, // allows us to pass back the entire request to the callback
+  updated: { type: Date, default: Date.now }
+
 },
   async function (req, email, password, done) { // callback with email and password from our form
     User.findOne({ 'email': email },

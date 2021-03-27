@@ -4,7 +4,7 @@ const events=mongoose.Schema({
     name:{type:String,required:true},
     details:{type:String},
     image:{type:String,required:true},
-    month:{type:String},
+    months:{type:String},
     discount:{type:String},
     lat:{type:String},
     lng:{type:String},
