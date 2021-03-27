@@ -7,6 +7,7 @@ const GetFarmAndRanches=require('../scripts/admin/admingetdatas');
 const User=require('../scripts/userScript');
 const AdminUser=require('../scripts/admin/adminlogin');
 const multer=require('multer');
+// const Features = require('../models/features');
 const storage=multer.diskStorage({
     destination:'uploads/',
     filename:function(req,file,cb){
@@ -110,4 +111,14 @@ router.post('/types',(req,res)=>{
 router.get('/gettypes',(req,res)=>{
  Product.gettypes(req,res);
 });
+// -----------------for features------
+router.get('/features',(req,res)=>{
+    GetFarmAndRanches.featuresGat(req,res);
+    });
+router.post('/features',(req,res)=>{
+    Product.mainfeatures(req,res);
+}); 
+router.get('/getfeatures',(req,res)=>{
+    Product.getfeatures(req,res);
+   });
 module.exports=router;

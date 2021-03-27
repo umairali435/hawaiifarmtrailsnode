@@ -6,6 +6,7 @@ const FarmerMarkets=require('../models/farmermarkets');
 const Events=require('../models/events');
 const GetTypes=require('../models/types');
 const Favourite=require('../models/favourite');
+const Features=require('../models/features');
 module.exports={
     famstandAddproduct: async function(req,res){
         if(req.body.name==undefined||req.body.name==null){
@@ -481,7 +482,44 @@ module.exports={
             
         }
     },
+    // --------------------------------
+    mainfeatures: async function(req,res){
+        console.log(req.body);
+        if(req.body.typess==undefined||req.body.typess==null){
+            return res.status(200).json({
+                "Success":false,
+                "message":"please enter your Event name",
+            });
+        }
+        let gettype=Features();
+        gettype._id=mongoose.Types.ObjectId();
+        gettype.typess=req.body.typess;
+        gettype.save(async function(err,typess){
+            if(err){
+                console.log(err);
+            }
+            else{
+                res.redirect('Features')
+
+            }
+        });
+
+    },
+    getfeatures : async function(req,res){
+        try {
+            let features=await Features.find();
+            return res.status(200).json({
+                "Success":true,
+                "Features":features,
+            });
+        } catch (error) {
+            
+        }
+    },
+    // ------------------------------------
+
     types: async function(req,res){
+        console.log(req.body);
         if(req.body.typess==undefined||req.body.typess==null){
             return res.status(200).json({
                 "Success":false,
@@ -513,6 +551,7 @@ module.exports={
             
         }
     },
+    // ---------------------------------------------------
     addFavourite:async function(req,res){
         console.log("adding to fav");
         if(req.body.postId==undefined||req.body.postId==null){

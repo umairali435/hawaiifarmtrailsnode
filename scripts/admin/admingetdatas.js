@@ -4,10 +4,12 @@ const CommunitySupportedAgriculture= require("../../models/csa"); //schema path
 const FarmerMarkets=require("../../models/farmermarkets");
 const Events=require("../../models/events");
 const Types=require("../../models/types");
+const Feature=require("../../models/features");
 module.exports={
     getFarmAndRanchesAdmin: async function(req,res){
      let farmandranch=await Farmandranches.find({});
-     res.render('Farms&Ranches',{farmandranch});
+     let maintype=await Types.find({});
+     res.render('Farms&Ranches',{farmandranch,maintype});
     },
     // ------------findCSA--------------
     getFindCSA: async function(req,res){  //function name
@@ -28,5 +30,10 @@ module.exports={
     typesGet:async function(req,res){
       let maintype=await Types.find({});
       res.render('Types',{maintype});
-    } 
+    },
+    // ----------------features------------- 
+    featuresGat:async function(req,res){
+        let mainfeature=await Feature.find({});
+        res.render('Features',{mainfeature});
+    }
 }

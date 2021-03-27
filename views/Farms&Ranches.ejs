@@ -63,11 +63,7 @@
         <br>
        <div class="row">
         <div class="col">
-<<<<<<< HEAD
           <input type="text" class="form-control" placeholder="search" name="search" id="search_place" required>
-=======
-          <input type="text" class="form-control" placeholder="Location" name="lat" required>
->>>>>>> 98937749686d99d1c504b2338a16208459e36a79
         </div>
         <div class="col">
           <input type="number" class="form-control" placeholder="Longtitude" name="lng" required>
@@ -82,12 +78,15 @@
        <br>
    <div class="row">
        <div class="col-6">
-         <select class="custom-select form-control " id="gender2",name="features">
+         <select class="custom-select form-control " id="gender2",name="Types">
            <option selected>Types</option>
-           <option value="1">Education</option>
-           <option value="2">Farm to tables</option>
-           <option value="3">Tour</option>
-           <option value="4">Farmstand</option>
+           
+<% if(locals.maintype) { %>
+  <% var sr = 1; maintype.forEach((type) => { %>
+           <option ><%= type.typess %></option>
+           
+<% sr++; }); %>
+<% } %>
          </select>
          </div>
          <div class="col-6">
