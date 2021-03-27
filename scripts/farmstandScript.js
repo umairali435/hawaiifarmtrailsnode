@@ -793,15 +793,16 @@ module.exports={
             if(req.body.userId == '' || req.body.userId == undefined){
                 return res.send({'Success' : false,'message' : 'User id is required.'})
             }
-            let products=await Favourite.find({user:req.body.userId}).populate({
+            let products=await Favourite.find({user:req.body.userId}).populate([{
                 path:'product',
                 model:'Farmandranches',
                 select:'name price details image lat lng'
-            }).populate({
+            },
+            {
                 path:'product',
-                model:'FarmerMarkets',
+                model:'Farmandranches',
                 select:'name price details image lat lng'   
-            });
+            }]);
             return res.send({'Success' : true,'products' : products});
         } catch (error) {
             
