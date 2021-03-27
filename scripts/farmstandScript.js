@@ -573,7 +573,7 @@ module.exports={
     },
     getisland : async function(req,res){
         try {
-            let Island=await Island.find();
+            let island=await Island.find();
             return res.status(200).json({
                 "Success":true,
                 "Island":island,
