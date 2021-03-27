@@ -799,10 +799,11 @@ module.exports={
                 select:'name price details image lat lng'
             },
             {
+               
                 path:'product',
                 model:'Farmandranches',
                 select:'name price details image lat lng'   
-            }]);
+            }]).lean();
             return res.send({'Success' : true,'products' : products});
         } catch (error) {
             
