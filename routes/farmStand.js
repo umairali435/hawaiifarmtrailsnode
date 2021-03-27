@@ -85,7 +85,7 @@ router.get('/csa/getProducts',(req,res)=>{
 router.get('/getFarmAndRanches/:userId',(req,res)=>{
     Product.getFarmAndRanches(req,res);
 });
-router.get('/getFarmAndRanches/:lat/:lng',(req,res)=>{
+router.get('/getFarmAndRanches/:userId/:lat/:lng',(req,res)=>{
     Product.getFarmAndRanchesbylatandlng(req,res);
 });
 
