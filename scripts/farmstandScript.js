@@ -6,6 +6,10 @@ const FarmerMarkets=require('../models/farmermarkets');
 const Events=require('../models/events');
 const GetTypes=require('../models/types');
 const Favourite=require('../models/favourite');
+const Features=require('../models/features');
+const Option=require('../models/option');
+const Island=require('../models/island');
+
 module.exports={
     famstandAddproduct: async function(req,res){
         if(req.body.name==undefined||req.body.name==null){
@@ -237,7 +241,7 @@ module.exports={
         farmandranches.timeFrom=req.body.timeFrom;
         farmandranches.timeTo=req.body.timeTo;
         farmandranches.contact=req.body.contact;
-        farmandranches.search=req.body.search;
+        farmandranches.lat=req.body.lat;
         farmandranches.lng=req.body.lng;
         farmandranches.nearlat=Math.floor(req.body.lat);
         farmandranches.nearlng=Math.floor(req.body.lng);
@@ -286,6 +290,7 @@ module.exports={
         console.log(req.params.lng);
         try {
             if(req.params.lat!=null||req.params.lng!=null&&req.params.lat!=undefined||req.params.lng!=undefined){
+                let allProducts = [];
             let products=await Farmandranches.find({
                 $or:[
                     {
@@ -294,9 +299,23 @@ module.exports={
                     }
                 ]
             });
+            if(products != null && products !=""){
+                for (const product of products) {
+                    let isfavourite = false;
+                    let mainObject = {}
+                    let favourite = await Favourite.findOne({user : req.params.userId,product : product._id});
+                    if(favourite != null && favourite !=""){
+                        isfavourite = true;
+                    }
+                    mainObject.isfavourite = isfavourite;
+                    mainObject.product = product;
+                    await allProducts.push(mainObject);
+
+                }
+            }
             return res.status(200).json({
                 "Success":true,
-                "FarmAndRanches":products,
+                "FarmAndRanches":allProducts,
             });
             }
         } catch (error) {
@@ -529,7 +548,111 @@ module.exports={
             
         }
     },
+    // ------------------------Island-------
+    mainisland: async function(req,res){
+        console.log(req.body);
+        if(req.body.typess==undefined||req.body.typess==null){
+            return res.status(200).json({
+                "Success":false,
+                "message":"please enter your Island name",
+            });
+        }
+        let gettype=Island();
+        gettype._id=mongoose.Types.ObjectId();
+        gettype.typess=req.body.typess;
+        gettype.save(async function(err,typess){
+            if(err){
+                console.log(err);
+            }
+            else{
+                res.redirect('Island');
+
+            }
+        });
+
+    },
+    getisland : async function(req,res){
+        try {
+            let Island=await Island.find();
+            return res.status(200).json({
+                "Success":true,
+                "Island":island,
+            });
+        } catch (error) {
+            
+        }
+    },
+    // ------------------option-----------
+    mainoption: async function(req,res){
+        console.log(req.body);
+        if(req.body.typess==undefined||req.body.typess==null){
+            return res.status(200).json({
+                "Success":false,
+                "message":"please enter your Event name",
+            });
+        }
+        let gettype=Option();
+        gettype._id=mongoose.Types.ObjectId();
+        gettype.typess=req.body.typess;
+        gettype.save(async function(err,typess){
+            if(err){
+                console.log(err);
+            }
+            else{
+                res.redirect('Option');
+
+            }
+        });
+
+    },
+    getoption : async function(req,res){
+        try {
+            let option=await Option.find();
+            return res.status(200).json({
+                "Success":true,
+                "Option":option,
+            });
+        } catch (error) {
+            
+        }
+    },
+    // --------------------------------features-----
+    mainfeatures: async function(req,res){
+        console.log(req.body);
+        if(req.body.typess==undefined||req.body.typess==null){
+            return res.status(200).json({
+                "Success":false,
+                "message":"please enter your Event name",
+            });
+        }
+        let gettype=Features();
+        gettype._id=mongoose.Types.ObjectId();
+        gettype.typess=req.body.typess;
+        gettype.save(async function(err,typess){
+            if(err){
+                console.log(err);
+            }
+            else{
+                res.redirect('Features')
+
+            }
+        });
+
+    },
+    getfeatures : async function(req,res){
+        try {
+            let features=await Features.find();
+            return res.status(200).json({
+                "Success":true,
+                "Features":features,
+            });
+        } catch (error) {
+            
+        }
+    },
+    // ------------------------------------types-----
     types: async function(req,res){
+        console.log(req.body);
         if(req.body.typess==undefined||req.body.typess==null){
             return res.status(200).json({
                 "Success":false,
@@ -561,6 +684,7 @@ module.exports={
             
         }
     },
+    // ---------------------------------------------------
     addFavourite:async function(req,res){
         console.log("adding to fav");
         if(req.body.postId==undefined||req.body.postId==null){

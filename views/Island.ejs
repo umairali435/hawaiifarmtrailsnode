@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Island</title>
+    <!-- <link rel="stylesheet" href="../public/css/style.css"> -->
+    <link rel="stylesheet" href="../css/style.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">  </head>
+  <body>
+
+<div class="container">
+  <div class="registration_form">
+    <br>
+    <div class="container">
+     <div class="card">
+       <div class="card-header bg-primary" id="card_header">
+             <h4 style="color:white">Island</h4>
+       </div>
+       <div class="card-body">
+         <form class="card-text" id="mType" method="post" >
+     
+       <br>
+   <div class="row">
+       <div class="col-6">
+         <input type="text" placeholder="Enter Types" name="typess" class="form-control">
+         </div>
+         <br>
+       <br>
+       <br>
+       <div class="col-12" id="aa">
+         <div class="row">
+
+               <div class="col-12">
+                 <input class="submit_button bg-primary" type="submit" name="" value="Upload">
+
+               </div>
+               <br><br>
+
+         </div>
+       </div>
+
+   </form>
+       </div>
+     </div>
+     <div class="card-footer">.</div>
+
+    </div>
+  <!-- </div> -->
+</div>
+</div>
+<br><br>
+<div class="container">
+  <div class="card">
+    <div class="card-header bg-primary">
+       <h3 style="color:white">Island </h3>
+    </div>
+    <div class="card-body">
+      <table class="table table-bordered border-primary">
+        <thead>
+          
+          <tr>
+            <th>Island Name</th>
+
+            <th>Delete</th>
+          </tr>
+          
+<% if(locals.mainisland) { %>
+  <% var sr = 1; mainisland.forEach((market) => { %>
+          <tr>
+            <td><%= market.typess %></td>
+            
+
+            <td>
+              <input type="button" name="" value="Delete" id="delete">
+            </td>
+          </tr>
+          
+
+<% sr++; }); %>
+<% } %>
+        </thead>
+
+      </table>
+
+      </div>
+      <div class="card-footer">
+        .
+      </div>
+
+    </div>
+  </div>
+</div>
+<br>
+<script>
+  
+  $("#mType").submit(function (e) {
+
+e.preventDefault(); // avoid to execute the actual submit of the form.
+$('.loading').css('display', 'block');
+var files = $('#image')[0].files;
+formDataAll = new FormData(this)
+if(files.length > 0 ){
+  fd.append('image',files[0]);
+$.ajax({
+    type: "POST",
+    url: '/FarmStand/island',
+    processData: false,
+    contentType: false,
+    // enctype: 'multipart/form-data',
+    data: formDataAll,
+    // serializes the form's elements.
+    success: function (data) {
+        $('.loading').css('display', 'none');
+        console.log(data);
+        window.location = "/FarmStand/island";
+
+    }
+});
+}
+});
+</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>  </body>
+</html>

@@ -87,10 +87,19 @@
             </div>
          </div>
        <br>
+       
    <div class="row">
        <div class="col-6">
-        <input type="text" placeholder="Enter types" class="form-control" name="typess">
-         </div>
+        <select class="custom-select form-control " id="gender2" name="typess">
+          <option selected>Types</option>
+          <option value="1"><script> if(locals.maintype) {
+             var srr = 1; maintype.forEach((market) => {
+               market.typess 
+              srr++; }); 
+              } </script></option>
+ 
+
+        </select>         </div>
          <div class="col-6">
            <select class="custom-select form-control " id="gender2" name="features">
              <option selected>Features</option>
@@ -156,11 +165,7 @@
             <td><%= evn.timeFrom %></td>
             <td><%= evn.timeTo %></td>
             <td><%= evn.months%></td>
-           <td> <% if(locals.maintype) { %>
-            <% var srr = 1; maintype.forEach((market) => { %>
-              <td><%= market.typess %></td>
-              <% srr++; }); %>  
-              <% } %></td>
+           <td> <%= evn.typess%></td>
             <td><%= evn.features %></td>
 
             <td>
@@ -171,11 +176,7 @@
 
 <% sr++; }); %>
 <% } %>
-<!-- <% if(locals.maintype) { %>
-  <% var srr = 1; maintype.forEach((market) => { %>
-    <td><%= market.name %></td>
-    <% srr++; }); %>
-    <% } %> -->
+
         </thead>
 
       </table>
