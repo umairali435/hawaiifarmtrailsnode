@@ -93,7 +93,9 @@ router.get('/getFarmAndRanches/:userId',(req,res)=>{
 router.get('/getFarmAndRanches/:userId/:lat/:lng',(req,res)=>{
     Product.getFarmAndRanchesbylatandlng(req,res);
 });
-
+router.get('/getFarmAndRanches/:userId/:type',(req,res)=>{
+    Product.getFarmAndRanchesbyTypes(req,res);
+});
 router.get('/getFarmerMarkets',(req,res)=>{
     Product.getFarmerMarkets(req,res);
 });

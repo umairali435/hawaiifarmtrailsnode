@@ -243,7 +243,9 @@ module.exports={
         farmandranches.nearlng=Math.floor(req.body.lng);
         farmandranches.website=req.body.website;
         farmandranches.image=req.file.path;
-        farmandranches.features=req.body.features;
+        farmandranches.types=req.body.types;
+        farmandranches.options=req.body.options;
+        farmandranches.islands=req.body.islands;
         farmandranches.reservation=req.body.reservation;
         farmandranches.save(async function (err, product) {
             if(err){
@@ -300,6 +302,50 @@ module.exports={
         } catch (error) {
             
         }
+    },
+    getFarmAndRanchesbyTypes : async function(req,res){
+        console.log(req.params.type);
+        if(req.params.type==null||req.params.type==undefined){
+            return res.status(200).json({
+                "Success":false,
+                "message":"please enter your types name",
+            });
+
+        }
+        let product=await Farmandranches.find({types:req.params.type});
+        return res.status(200).json({
+            "Success":true,
+            "FarmAndRanches":product,
+        });
+    },getFarmAndRanchesbyOptions : async function(req,res){
+        console.log(req.params.type);
+        if(req.params.options==null||req.params.options==undefined){
+            return res.status(200).json({
+                "Success":false,
+                "message":"please enter your options name",
+            });
+
+        }
+        let product=await Farmandranches.find({options:req.params.options});
+        return res.status(200).json({
+            "Success":true,
+            "FarmAndRanches":product,
+        });
+    },
+    getFarmAndRanchesbyIslands : async function(req,res){
+        console.log(req.params.islands);
+        if(req.params.islands==null||req.params.islands==undefined){
+            return res.status(200).json({
+                "Success":false,
+                "message":"please enter your islands name",
+            });
+
+        }
+        let product=await Farmandranches.find({islands:req.params.islands});
+        return res.status(200).json({
+            "Success":true,
+            "FarmAndRanches":product,
+        });
     },
     AddFarmerMarkets : async function(req,res){
         if(req.body.name==undefined||req.body.name==null){

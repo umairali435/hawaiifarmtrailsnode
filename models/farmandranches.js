@@ -15,6 +15,8 @@ const farmandranches=mongoose.Schema({
     timeFrom:{type:String},
     timeTo:{type:String},
     reservation:{type:String},
-    features:{type:String},
+    types:{type:String},
+    options:{type:String},
+    islands:{type:String},
 });
 module.exports=mongoose.model('Farmandranches',farmandranches);
