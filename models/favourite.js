@@ -1,11 +1,11 @@
 let mongoose = require('mongoose');
 
 let favourite = new mongoose.Schema({
-    FarmandRanches: {
+    product: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Farmandranches",
     },
-    FarmerMarkets: {
+    product: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "FarmerMarkets",
     },

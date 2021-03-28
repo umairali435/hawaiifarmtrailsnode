@@ -793,7 +793,7 @@ module.exports={
             if(req.body.userId == '' || req.body.userId == undefined){
                 return res.send({'Success' : false,'message' : 'User id is required.'})
             }
-            let products=await Favourite.find({user:req.body.userId}).populate('FarmandRanches');
+            let products=await Favourite.find({user:req.body.userId}).populate('product');
             return res.send({'Success' : true,'products' : products});
         } catch (error) {
             
