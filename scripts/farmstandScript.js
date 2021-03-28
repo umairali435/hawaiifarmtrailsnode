@@ -796,14 +796,8 @@ module.exports={
                 path:'product',
                 model:'Farmandranches',
                 select:'name price details image lat lng'
-            }).exec(function(err,prod){
-            if(err){
-             console.log(err);
-            }else{
-                return res.send({'Succes' : true,'products' : prod,'d':products});
-            }
-            });
-            
+            }).lean();
+            return res.send({'Succes' : true,'products' :products});
         } catch (error) {
             
         }
