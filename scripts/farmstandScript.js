@@ -914,6 +914,16 @@ module.exports={
         } catch (error) {
         }
     },
+    getFavProductsForFarmerMarkets:async function(req,res){
+        try {
+            if(req.body.userId == '' || req.body.userId == undefined){
+                return res.send({'Success' : false,'message' : 'User id is required.'})
+            }
+            let products=await Favourite.find({user:req.body.userId}).populate('farmandranches');
+            return res.send({'Success' : true,'products' : products});
+        } catch (error) {
+        }
+    },
     // -----------------------------bussniess support-----------
     addBusniessSuport:async function(req,res){
         if(req.body.name==undefined||req.body.name==null){
