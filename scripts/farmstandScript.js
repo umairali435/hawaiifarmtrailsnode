@@ -773,19 +773,41 @@ module.exports={
                 await foundfav.remove();
                 return res.send({'Success' : true,'message' : 'Product removed from Favourites'})
             }else{
+                let farmandranches=await Farmandranches.findOne({_id:req.body.postId});
+                if(farmandranches.product.length==0){
+                    console.log('far');
                 let newFav =  Favourite();
                 newFav.user = req.body.userId;
-                newFav.product = req.body.postId;
+                newFav.farmermarkets = req.body.postId;
                 await newFav.save(async function (err, product){
                     if(err){
                         console.log(err);
                     }else{
                         res.status(200).json({
                            "Success":true,
+                           'product':product,
                            "message":" Added Successfully",
                         });
                     }
                 });
+                }else{
+                    console.log('farm');
+                let newFav =  Favourite();
+                newFav.user = req.body.userId;
+                newFav.farmandranches = req.body.postId;
+                await newFav.save(async function (err, product){
+                    if(err){
+                        console.log(err);
+                    }else{
+                        res.status(200).json({
+                           "Success":true,
+                           'product':product,
+                           "message":" Added Successfully",
+                        });
+                    }
+                });
+                }
+                
             }
     },
     getFavProducts:async function(req,res){
@@ -793,7 +815,7 @@ module.exports={
             if(req.body.userId == '' || req.body.userId == undefined){
                 return res.send({'Success' : false,'message' : 'User id is required.'})
             }
-            let products=await Favourite.find({user:req.body.userId}).populate('product');
+            let products=await Favourite.find({user:req.body.userId}).populate('farmandranches').populate('farmermarkets');
             return res.send({'Success' : true,'products' : products});
         } catch (error) {
             
