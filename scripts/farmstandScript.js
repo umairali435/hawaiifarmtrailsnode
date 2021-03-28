@@ -787,8 +787,24 @@ module.exports={
             if(req.body.userId == '' || req.body.userId == undefined){
                 return res.send({'Success' : false,'message' : 'User id is required.'})
             }
-            let products=await Favourite.find({user:req.body.userId}).populate('FarmerMarkets').populate('Farmandranches');
-            return res.send({'Success' : true,'products' : products});
+            let products=await Favourite.find({user:req.body.userId})
+            .populate([{
+                path:'product',
+                model:'FarmerMarkets',
+                select:'name price details image lat lng'
+            },
+            {
+                path:'product',
+                model:'Farmandranches',
+                select:'name price details image lat lng'   
+            }]).exec(function(err,prod){
+            if(err){
+             console.log(err);
+            }else{
+                return res.send({'Success' : true,'products' : prod});
+            }
+            });
+            
         } catch (error) {
             
         }
