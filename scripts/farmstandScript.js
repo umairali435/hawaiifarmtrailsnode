@@ -498,15 +498,15 @@ module.exports={
             let allProducts = [];
             let products=await FarmerMarkets.find();
             if(products != null && products !=""){
-                for (const data of products) {
+                for (const product of products) {
                     let isfavourite = false;
                     let mainObject = {}
-                    let favourite = await Favourite.findOne({user : req.params.userId,product : data._id});
+                    let favourite = await Favourite.findOne({user : req.params.userId,product : product._id});
                     if(favourite != null && favourite !=""){
                         isfavourite = true;
                     }
                     mainObject.isfavourite = isfavourite;
-                    mainObject.data = data;
+                    mainObject.product = product;
                     await allProducts.push(mainObject);
 
                 }
@@ -787,18 +787,24 @@ module.exports={
             if(req.body.userId == '' || req.body.userId == undefined){
                 return res.send({'Success' : false,'message' : 'User id is required.'})
             }
-            let products=await Favourite.find({user:req.body.userId}).populate({
-                path:'product',
+            let products=await Favourite.find({user:req.body.userId})
+            .populate([{
+                path:'FarmerMarkets',
+                model:'FarmerMarkets',
+                select:'name price details image lat lng'
+            },
+            {
+                path:'FarmandRanches',
                 model:'Farmandranches',
-                model:'FarmerMarkets',
-                select:'name price details image lat lng'
-            }).lean();
-            let product=await Favourite.find({user:req.body.userId}).populate({
-                path:'data',
-                model:'FarmerMarkets',
-                select:'name price details image lat lng'
+                select:'name price details image lat lng'   
+            }]).exec(function(err,prod){
+            if(err){
+            
+            }else{
+                return res.send({'Success' : true,'products' : prod});
+            }
             });
-            return res.send({'Succes' : true,'product':product,'products' :products});
+            
         } catch (error) {
             
         }
