@@ -788,20 +788,19 @@ module.exports={
                 return res.send({'Success' : false,'message' : 'User id is required.'})
             }
             let products=await Favourite.find({user:req.body.userId})
-            .populate([{
+            .populate({
                 path:'data',
                 model:'FarmerMarkets',
                 select:'name price details image lat lng'
-            },
-            {
+            }).populate({
                 path:'product',
                 model:'Farmandranches',
-                select:'name price details image lat lng'   
-            }]).exec(function(err,prod){
+                select:'name price details image lat lng'
+            }).exec(function(err,prod){
             if(err){
              console.log(err);
             }else{
-                return res.send({'Success' : true,'products' : prod});
+                return res.send({'Success' : true,'products' : prod,'d':products});
             }
             });
             
