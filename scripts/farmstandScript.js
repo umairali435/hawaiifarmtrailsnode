@@ -466,6 +466,12 @@ module.exports={
             });
         }
         
+        if(req.body.features==undefined||req.body.features==null){
+            return res.status(200).json({
+                "Success":false,
+                "message":"please enter your features",
+            });
+        }
         
         let farmerMarkets=FarmerMarkets();
         farmerMarkets._id=mongoose.Types.ObjectId();
@@ -483,7 +489,7 @@ module.exports={
         farmerMarkets.type=req.body.type;
         farmerMarkets.island=req.body.island;
         farmerMarkets.option=req.body.option;
-        farmerMarkets.save(async function (err, products) {
+        farmerMarkets.save(async function (err, product) {
             if(err){
                 console.log(err);
             }else{
@@ -787,24 +793,17 @@ module.exports={
             if(req.body.userId == '' || req.body.userId == undefined){
                 return res.send({'Success' : false,'message' : 'User id is required.'})
             }
-            let products=await Favourite.find({user:req.body.userId})
-            .populate([{
-                path:'FarmerMarkets',
-                model:'FarmerMarkets',
+            let products=await Favourite.find({user:req.body.userId}).populate([{
+                path:'FarmandRanches',
+                model:'Farmandranches',
                 select:'name price details image lat lng'
             },
             {
-                path:'FarmandRanches',
-                model:'Farmandranches',
+                path:'FarmerMarkets',
+                model:'FarmerMarkets',
                 select:'name price details image lat lng'   
-            }]).exec(function(err,prod){
-            if(err){
-            
-            }else{
-                return res.send({'Success' : true,'products' : prod});
-            }
-            });
-            
+            }]);
+            return res.send({'Success' : true,'products' : products});
         } catch (error) {
             
         }
