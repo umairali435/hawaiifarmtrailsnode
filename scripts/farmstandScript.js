@@ -790,6 +790,7 @@ module.exports={
             let products=await Favourite.find({user:req.body.userId}).populate({
                 path:'product',
                 model:'Farmandranches',
+                model:'FarmerMarkets',
                 select:'name price details image lat lng'
             }).lean();
             let product=await Favourite.find({user:req.body.userId}).populate({
