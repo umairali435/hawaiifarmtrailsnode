@@ -466,12 +466,6 @@ module.exports={
             });
         }
         
-        if(req.body.features==undefined||req.body.features==null){
-            return res.status(200).json({
-                "Success":false,
-                "message":"please enter your features",
-            });
-        }
         
         let farmerMarkets=FarmerMarkets();
         farmerMarkets._id=mongoose.Types.ObjectId();
