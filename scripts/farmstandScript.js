@@ -800,7 +800,7 @@ module.exports={
             if(err){
              console.log(err);
             }else{
-                return res.send({'Success' : true,'products' : prod,'d':products});
+                return res.send({'Succes' : true,'products' : prod,'d':products});
             }
             });
             
