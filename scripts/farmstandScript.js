@@ -912,8 +912,6 @@ module.exports={
             let products=await Favourite.find({user:req.body.userId}).populate('farmandranches');
             return res.send({'Success' : true,'products' : products});
         } catch (error) {
-            farmandranches
-            farmermarkets
         }
     },
     // -----------------------------bussniess support-----------
