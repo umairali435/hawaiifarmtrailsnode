@@ -9,6 +9,8 @@ const Favourite=require('../models/favourite');
 const Features=require('../models/features');
 const Option=require('../models/option');
 const Island=require('../models/island');
+const ShippingAddress=require('../models/shippingAddress');
+const shippingAddress = require('../models/shippingAddress');
 
 module.exports={
     // ---------------------formstand-
@@ -511,7 +513,7 @@ module.exports={
             
         }
     },
-    
+    // ----------------------------event-------------
     AddEvents : async function(req,res){
         if(req.body.name==undefined||req.body.name==null){
             return res.status(200).json({
@@ -597,6 +599,60 @@ module.exports={
             return res.status(200).json({
                 "Success":true,
                 "Events":events,
+            });
+        } catch (error) {
+            
+        }
+    },
+    // ----------------------shippingAddress--------
+    AddShipingAddress : async function(req,res){
+        if(req.body.houseno==undefined||req.body.houseno==null){
+            return res.status(200).json({
+                "Success":false,
+                "message":"please enter your houseno",
+            });
+        }
+        if(req.body.city==undefined||req.body.city==null){
+            return res.status(200).json({
+                "Success":false,
+                "message":"please enter your city",
+            });
+        }
+        if(req.body.country==undefined||req.body.country==null){
+            return res.status(200).json({
+                "Success":false,
+                "message":"please enter your country",
+            });
+        }
+        if(req.body.note==undefined||req.body.note==null){
+            return res.status(200).json({
+                "Success":false,
+                "message":"please enter your note",
+            });
+        }
+        
+        
+        let shippingAddress=ShippingAddress();
+        shippingAddress._id=mongoose.Types.ObjectId();
+        shippingAddress.houseno=req.body.houseno;
+        shippingAddress.city=req.body.city;
+        shippingAddress.country=req.body.country;
+        shippingAddress.note=req.body.note;
+        shippingAddress.save(async function (err, product) {
+            if(err){
+                console.log(err);
+            }else{
+                res.redirect('ShipingAddress')
+
+            }
+           });
+    },
+    getShipingAddress : async function(req,res){
+        try {
+            let events=await Events.find({});
+            return res.status(200).json({
+                "Success":true,
+                "ShipingAddress":shippingAddress,
             });
         } catch (error) {
             
