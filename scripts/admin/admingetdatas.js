@@ -9,6 +9,8 @@ const Option=require("../../models/option");
 const Island=require("../../models/island");
 const FarmStand=require("../../models/farmstand");
 const ShippingAddress=require("../../models/shippingAddress");
+const BusniessSuport=require("../../models/busniesssupport");
+const Category=require("../../models/categories");
 module.exports={
     getFarmAndRanchesAdmin: async function(req,res){
      let farmandranch=await Farmandranches.find({});
@@ -70,6 +72,24 @@ module.exports={
     // -------------------------for shippingAddress---------
     shippingAddressGet: async function(req,res){
         let mainShipingAddress=await ShippingAddress.find({});
-        res.render('ShippingAddress',{mainShipingAddress});
+        res.render('ShipingAddress',{mainShipingAddress});
+    },
+    // --------------------busniesssupport-------
+    busniesssupportGet: async function(req,res){
+        let mainBusniessSupport = await BusniessSuport.find({});
+        let maintype=await Types.find({});
+        let mainfeature=await Feature.find({});
+        let mainoption=await Option.find({});
+        let mainisland=await Island.find({});
+        let maincategories = await Category.find({});
+
+   
+   
+        res.render('BusniessSupport',{mainBusniessSupport,maintype,mainfeature,mainoption,mainisland,maincategories}); 
+    },
+    // ------------------------categories------
+    categoriesGet: async function(req,res){
+        let maincategories = await Category.find({});
+        res.render('Categories',{maincategories});
     }
 }

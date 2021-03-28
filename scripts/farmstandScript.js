@@ -10,7 +10,9 @@ const Features=require('../models/features');
 const Option=require('../models/option');
 const Island=require('../models/island');
 const ShippingAddress=require('../models/shippingAddress');
-const shippingAddress = require('../models/shippingAddress');
+const BusniessSuport=require('../models/busniesssupport');
+const Category=require('../models/categories');
+const categories = require('../models/categories');
 
 module.exports={
     // ---------------------formstand-
@@ -673,6 +675,40 @@ module.exports={
             
         }
     },
+    // -------------------categories-----------------
+    maincategory: async function(req,res){
+        console.log(req.body);
+        if(req.body.typess==undefined||req.body.typess==null){
+            return res.status(200).json({
+                "Success":false,
+                "message":"please enter your  Categry",
+            });
+        }
+        let gettype=Category();
+        gettype._id=mongoose.Types.ObjectId();
+        gettype.typess=req.body.typess;
+        gettype.save(async function(err,typess){
+            if(err){
+                console.log(err);
+            }
+            else{
+                res.redirect('Categories');
+
+            }
+        });
+
+    },
+    getcategory : async function(req,res){
+        try {
+            let category=await Category.find();
+            return res.status(200).json({
+                "Success":true,
+                "Category":category,
+            });
+        } catch (error) {
+            
+        }
+    },
     // ------------------------Island-------
     mainisland: async function(req,res){
         console.log(req.body);
@@ -879,7 +915,103 @@ module.exports={
             farmandranches
             farmermarkets
         }
-    }
+    },
+    // -----------------------------bussniess support-----------
+    addBusniessSuport:async function(req,res){
+        if(req.body.name==undefined||req.body.name==null){
+            return res.status(200).json({
+                "Success":false,
+                "message":"please enter your Product name",
+            });
+        }
+        if(req.body.weeklyprice==undefined||req.body.weeklyprice==null){
+            return res.status(200).json({
+                "Success":false,
+                "message":"please enter your Product weeklyPrice",
+            });
+        }
+        if(req.body.details==undefined||req.body.details==null){
+            return res.status(200).json({
+                "Success":false,
+                "message":"please enter your Product details",
+            });
+        }
+        if(req.body.timeFrom==undefined||req.body.timeFrom==null){
+            return res.status(200).json({
+                "Success":false,
+                "message":"please enter your TimeFrom",
+            });
+        }
+        if(req.body.timeTo==undefined||req.body.timeTo==null){
+            return res.status(200).json({
+                "Success":false,
+                "message":"please enter your Product TimeTo",
+            });
+        }
+        if(req.body.contact==undefined||req.body.contact==null){
+            return res.status(200).json({
+                "Success":false,
+                "message":"please enter your Contact",
+            });
+        }
+        if(req.body.lat==undefined||req.body.lat==null){
+            return res.status(200).json({
+                "Success":false,
+                "message":"please enter your latitude",
+            });
+        }
+        if(req.body.lng==undefined||req.body.lng==null){
+            return res.status(200).json({
+                "Success":false,
+                "message":"please enter your longitude",
+            });
+        }
+        
+        if(req.body.reservation==undefined||req.body.reservation==null){
+            return res.status(200).json({
+                "Success":false,
+                "message":"please enter reservation",
+            });
+        }
+        
+        let busniesssuport=BusniessSuport();
+        busniesssuport._id=mongoose.Types.ObjectId();
+        busniesssuport.name=req.body.name;
+        busniesssuport.weeklyprice=req.body.weeklyprice;
+        busniesssuport.details=req.body.details;
+        busniesssuport.timeFrom=req.body.timeFrom;
+        busniesssuport.timeTo=req.body.timeTo;
+        busniesssuport.contact=req.body.contact;
+        busniesssuport.lat=req.body.lat;
+        busniesssuport.lng=req.body.lng;
+        busniesssuport.nearlat=Math.floor(req.body.lat);
+        busniesssuport.nearlng=Math.floor(req.body.lng);
+        busniesssuport.website=req.body.website;
+        busniesssuport.image=req.file.path;
+        busniesssuport.types=req.body.types;
+        busniesssuport.options=req.body.options;
+        busniesssuport.islands=req.body.islands;
+        busniesssuport.reservation=req.body.reservation;
+        busniesssuport.save(async function (err, product) {
+            if(err){
+                console.log(err);
+            }else{
+                res.redirect('BusniessSupport');
+            }
+           });
+    },
+    getBusniessSupport : async function(req,res){
+        try {
+            let bussniess=await BusniessSuport.find();
+            return res.status(200).json({
+                "Success":true,
+                "BusniessSuport":bussniess,
+            });
+        } catch (error) {
+            
+        }
+        
+    },
 }
 // [{
 //     path:'FarmandRanches',
