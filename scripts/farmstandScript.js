@@ -512,7 +512,7 @@ module.exports={
                 for (const product of products) {
                     let isfavourite = false;
                     let mainObject = {}
-                    let favourite = await Favourite.findOne({user : req.params.userId,product : product._id});
+                    let favourite = await Favourite.findOne({user : req.params.userId,farmermarkets : product._id});
                     if(favourite != null && favourite !=""){
                         isfavourite = true;
                     }
@@ -909,10 +909,16 @@ module.exports={
             if(req.body.userId == '' || req.body.userId == undefined){
                 return res.send({'Success' : false,'message' : 'User id is required.'})
             }
-            let products=await Favourite.find({user:req.body.userId}).populate('farmandranches').populate('farmermarkets');
-            return res.send({'Success' : true,'products' : products});
-        } catch (error) {
-            
+            let products=await Favourite.find({user:req.body.userId}).populate({
+                model:'Farmandranches',
+                path:'farmandranches'}).populate({
+                    model:'FarmerMarkets',
+                    path:'farmermarkets'}).exec(function(err,data){
+                        return res.send({'Success' : true,'products' : data});
+                    });
+                        } catch (error) {
+            farmandranches
+            farmermarkets
         }
     },
     // -----------------------------bussniess support-----------
