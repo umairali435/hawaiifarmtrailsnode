@@ -774,7 +774,7 @@ module.exports={
                 return res.send({'Success' : true,'message' : 'Product removed from Favourites'})
             }else{
                 let farmandranches=await Farmandranches.findOne({_id:req.body.postId});
-                if(farmandranches.product.length==0){
+                if(farmandranches.length==0){
                     console.log('far');
                 let newFav =  Favourite();
                 newFav.user = req.body.userId;
