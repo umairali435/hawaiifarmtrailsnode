@@ -34,16 +34,16 @@
        <br>
        <div class="row">
         <div class="col">
-          <input type="number" class="form-control" placeholder="Contact" name="contact" required>
+          <input type="number" class="form-control" placeholder="Discount" name="discount" required>
         </div>
         <div class="col">
-          <input type="text" class="form-control" placeholder="Website Link" name="website" required>
+          <input type="text" class="form-control" placeholder="Shiping Price" name="shipingPrice" required>
         </div>
         </div>
        <br>
    <div class="row">
        <div class="col-6">
-         <select class="custom-select form-control " id="gender2",name="Types">
+         <select class="custom-select form-control " id="gender2",name="types">
            <option selected>Types</option>
            
 <% if(locals.maintype) { %>
@@ -54,15 +54,6 @@
 <% } %>
          </select>
          </div>
-         <div class="col-6">
-           <select class="custom-select form-control " id="gender2",name="features">
-             <option selected>Features</option>
-             <option value="1">Alcohal</option>
-             <option value="2">Animals</option>
-
-           </select>
-          </div>
-       
        <br>
        <br>
        <br>
@@ -100,12 +91,10 @@
           <tr>
             <th>Product Name</th>
             <th>Product Price</th>
-            <th>Product <br> Details</th>
-            <th>Opening Time</th>
-            <th>Closing Time</th>
+            <th>Discount</th>
+            <th>Shiping Price</th>
             <th>Types</th>
-            <th>Features</th>
-
+            
             <th>Delete</th>
           </tr>
           
@@ -114,11 +103,9 @@
           <tr>
             <td><%= farm.name %></td>
             <td><%= farm.price %></td>
-            <td><%= farm.details %></td>
-            <td><%= farm.timeFrom %></td>
+            <td><%= farm.discount %></td>
             <td><%= farm.timeTo %></td>
-            <td><%= farm.Types %></td>
-            <td><%= farm.features %></td>
+            <td><%= farm.types %></td>
 
             <td>
               <input type="button" name="" value="Delete" id="delete">
@@ -153,7 +140,7 @@ if(files.length > 0 ){
   fd.append('image',files[0]);
 $.ajax({
     type: "POST",
-    url: '/FarmStand/Farms&Ranches',
+    url: '/FarmStand/formstand',
     processData: false,
     contentType: false,
     enctype: 'multipart/form-data',
@@ -162,7 +149,7 @@ $.ajax({
     success: function (data) {
         $('.loading').css('display', 'none');
         console.log(data);
-        window.location = "/FarmStand/Farms&Ranches";
+        window.location = "/FarmStand/formstand";
 
     }
 });
