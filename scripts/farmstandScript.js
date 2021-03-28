@@ -793,19 +793,20 @@ module.exports={
             if(req.body.userId == '' || req.body.userId == undefined){
                 return res.send({'Success' : false,'message' : 'User id is required.'})
             }
-            let products=await Favourite.find({user:req.body.userId}).populate([{
-                path:'FarmandRanches',
-                model:'Farmandranches',
-                select:'name price details image lat lng'
-            },
-            {
-                path:'FarmerMarkets',
-                model:'FarmerMarkets',
-                select:'name price details image lat lng'   
-            }]);
+            let products=await Favourite.find({user:req.body.userId}).populate('FarmandRanches');
             return res.send({'Success' : true,'products' : products});
         } catch (error) {
             
         }
     }
 }
+// [{
+//     path:'FarmandRanches',
+//     model:'Farmandranches',
+//     select:'name price details image lat lng'
+// },
+// {
+//     path:'FarmerMarkets',
+//     model:'FarmerMarkets',
+//     select:'name price details image lat lng'   
+// }]
