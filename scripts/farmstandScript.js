@@ -507,7 +507,7 @@ module.exports={
                 for (const product of products) {
                     let isfavourite = false;
                     let mainObject = {}
-                    let favourite = await Favourite.findOne({user : req.params.userId,product : product._id});
+                    let favourite = await Favourite.findOne({user : req.params.userId,farmermarkets : product._id});
                     if(favourite != null && favourite !=""){
                         isfavourite = true;
                     }
