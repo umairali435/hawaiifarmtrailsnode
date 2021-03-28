@@ -877,9 +877,10 @@ module.exports={
                 model:'Farmandranches',
                 path:'farmandranches'}).populate({
                     model:'FarmerMarkets',
-                    path:'farmermarkets'});
-            return res.send({'Success' : true,'products' : products});
-        } catch (error) {
+                    path:'farmermarkets'}).exec(function(err,data){
+                        return res.send({'Success' : true,'products' : data});
+                    });
+                        } catch (error) {
             farmandranches
             farmermarkets
         }
