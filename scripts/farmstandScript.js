@@ -792,7 +792,12 @@ module.exports={
                 model:'Farmandranches',
                 select:'name price details image lat lng'
             }).lean();
-            return res.send({'Succes' : true,'products' :products});
+            let product=await Favourite.find({user:req.body.userId}).populate({
+                path:'data',
+                model:'FarmerMarkets',
+                select:'name price details image lat lng'
+            });
+            return res.send({'Succes' : true,'product':product,'products' :products});
         } catch (error) {
             
         }
