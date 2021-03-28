@@ -82,6 +82,9 @@ router.post('/AddtoFavourites',(req,res)=>{
 router.post('/getFavourites',(req,res)=>{
     Product.getFavProducts(req,res);
 });
+router.post('/getFavouritesFarmerMarkets',(req,res)=>{
+    Product.getFavProductsForFarmerMarkets(req,res);
+});
 // ------------------formstand-------------
 router.get('/formstand',(req,res)=>{
     GetFarmAndRanches.getFarmstand(req,res);
