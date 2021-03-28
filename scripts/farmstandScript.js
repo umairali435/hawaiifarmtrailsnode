@@ -767,30 +767,12 @@ module.exports={
                 "message":"please provide userId",
             });
         }
-        let foundfav = await Favourite.findOne({product : req.body.postId, user : req.body.userId});
-            console.log(foundfav);
+        if(req.body.type=="farmandranches"){
+            let foundfav = await Favourite.findOne({farmandranches : req.body.postId, user : req.body.userId});
             if(foundfav != null && foundfav !=''){
                 await foundfav.remove();
                 return res.send({'Success' : true,'message' : 'Product removed from Favourites'})
             }else{
-                if(req.body.type=="farmandranches"){
-                    console.log('far');
-                let newFav =  Favourite();
-                newFav.user = req.body.userId;
-                newFav.farmermarkets = req.body.postId;
-                await newFav.save(async function (err, product){
-                    if(err){
-                        console.log(err);
-                    }else{
-                        res.status(200).json({
-                           "Success":true,
-                           'product':product,
-                           "message":" Added Successfully",
-                        });
-                    }
-                });
-                }else{
-                    console.log('farm');
                 let newFav =  Favourite();
                 newFav.user = req.body.userId;
                 newFav.farmandranches = req.body.postId;
@@ -805,9 +787,29 @@ module.exports={
                         });
                     }
                 });
-                }
-                
             }
+        }else{
+            let foundfav = await Favourite.findOne({farmermarkets : req.body.postId, user : req.body.userId});
+            if(foundfav != null && foundfav !=''){
+                await foundfav.remove();
+                return res.send({'Success' : true,'message' : 'Product removed from Favourites'})
+            }else{
+                let newFav =  Favourite();
+                newFav.user = req.body.userId;
+                newFav.farmermarkets = req.body.postId;
+                await newFav.save(async function (err, product){
+                    if(err){
+                        console.log(err);
+                    }else{
+                        res.status(200).json({
+                           "Success":true,
+                           'product':product,
+                           "message":" Added Successfully",
+                        });
+                    }
+                });
+            }
+        }
     },
     getFavProducts:async function(req,res){
         try {
