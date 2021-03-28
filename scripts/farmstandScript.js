@@ -498,15 +498,15 @@ module.exports={
             let allProducts = [];
             let products=await FarmerMarkets.find();
             if(products != null && products !=""){
-                for (const product of products) {
+                for (const data of products) {
                     let isfavourite = false;
                     let mainObject = {}
-                    let favourite = await Favourite.findOne({user : req.params.userId,product : product._id});
+                    let favourite = await Favourite.findOne({user : req.params.userId,product : data._id});
                     if(favourite != null && favourite !=""){
                         isfavourite = true;
                     }
                     mainObject.isfavourite = isfavourite;
-                    mainObject.product = product;
+                    mainObject.data = data;
                     await allProducts.push(mainObject);
 
                 }
