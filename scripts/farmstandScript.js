@@ -789,7 +789,7 @@ module.exports={
             }
             let products=await Favourite.find({user:req.body.userId})
             .populate([{
-                path:'product',
+                path:'data',
                 model:'FarmerMarkets',
                 select:'name price details image lat lng'
             },
