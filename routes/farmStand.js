@@ -7,7 +7,7 @@ const GetFarmAndRanches=require('../scripts/admin/admingetdatas');
 const User=require('../scripts/userScript');
 const AdminUser=require('../scripts/admin/adminlogin');
 const multer=require('multer');
-const { getShipingAddress } = require('../scripts/farmstandScript');
+const { getShipingAddress, getBusniessSupport } = require('../scripts/farmstandScript');
 // const Features = require('../models/features');
 const storage=multer.diskStorage({
     destination:'uploads/',
@@ -162,9 +162,29 @@ router.get('/getfromislands/:userId/:islands',(req,res)=>{
    });
 //    --------------------------------
 router.get('/shipingaddress',(req,res)=>{
-    GetFarmAndRanches=getShipingAddress(req,res);
+    GetFarmAndRanches.shippingAddressGet(req,res);
 });
 router.post('/shipingaddress',(req,res)=>{
     Product.AddShipingAddress(req,res);
+});
+// ------------------------------
+router.get('/busniesssupport',(req,res)=>{
+    GetFarmAndRanches.busniesssupportGet(req,res);
+});
+router.post('/busniesssuport',(req,res)=>{
+    Product.addBusniessSuport(req,res);
+});
+router.get('/getBusniessSuport',(req,res)=>{
+    Product.getBusniessSupport(req,res);
+});
+// ---------------------------------
+router.get('/category',(req,res)=>{
+    GetFarmAndRanches.categoriesGet(req,res);
+});
+router.post('/category',(req,res)=>{
+    Product.getcategory(req,res);
+});
+router.get('/getcategory',(req,res)=>{
+    Product.getcategory(req,res);
 });
 module.exports=router;
