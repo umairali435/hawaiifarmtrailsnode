@@ -787,12 +787,7 @@ module.exports={
             if(req.body.userId == '' || req.body.userId == undefined){
                 return res.send({'Success' : false,'message' : 'User id is required.'})
             }
-            let products=await Favourite.find({user:req.body.userId})
-            .populate({
-                path:'data',
-                model:'FarmerMarkets',
-                select:'name price details image lat lng'
-            }).populate({
+            let products=await Favourite.find({user:req.body.userId}).populate({
                 path:'product',
                 model:'Farmandranches',
                 select:'name price details image lat lng'
