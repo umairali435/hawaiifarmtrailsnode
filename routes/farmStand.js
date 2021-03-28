@@ -63,9 +63,9 @@ router.post('/Farms&Ranches',upload.single('image'),(req,res)=>{
 Product.addFarmAndRanches(req,res);
 });
 // -------------------------------
-router.get('/getFarmerMarkets',(req,res)=>{
-    Product.getFarmerMarkets(req,res);
-});
+// router.get('/getFarmerMarkets',(req,res)=>{
+//     Product.getFarmerMarkets(req,res);
+// });
 router.get('/FarmerMarkets',(req,res)=>{
     GetFarmAndRanches.getFarmersMarkets(req,res);
 });
@@ -105,10 +105,10 @@ router.get('/getFarmAndRanches/:userId/:lat/:lng',(req,res)=>{
 router.get('/getFarmAndRanches/:userId/:type',(req,res)=>{
     Product.getFarmAndRanchesbyTypes(req,res);
 });
-router.get('/getFarmerMarkets',(req,res)=>{
+router.get('/getFarmerMarkets/:userId',(req,res)=>{
     Product.getFarmerMarkets(req,res);
 });
-router.get('/events',(req,res)=>{
+router.get('/getevents',(req,res)=>{
     Product.getEvents(req,res);
 });
 // ----------------for Types-----------------
